@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import RootLayout from "./pages/RootLayout";
+import RootLayout from "./components/RootLayout";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
