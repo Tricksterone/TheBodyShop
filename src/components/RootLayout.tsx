@@ -36,10 +36,6 @@ const StyledFooterContainer = styled(Container)({
   backgroundColor: "#fafaf8",
 });
 
-const StyledMainBox = styled(Box)({
-  display: "flex",
-});
-
 export default function RootLayout() {
   return (
     <div>
@@ -59,9 +55,7 @@ export default function RootLayout() {
         </StyledAppBar>
       </header>
       <main>
-        <StyledMainContainer>
-          <Outlet />
-        </StyledMainContainer>
+        <Outlet />
       </main>
       <footer>
         <StyledFooterContainer>FOOTER</StyledFooterContainer>
