@@ -2,6 +2,7 @@ import { AppBar, Box, IconButton, Toolbar, styled } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Card from "./Card";
 
 const StyledAppBar = styled(AppBar)({
   position: "static",
@@ -35,6 +36,7 @@ export default function RootLayout() {
       </header>
       <main>
         <Outlet />
+        <Card />
       </main>
       <footer>
         <h2>Footer</h2>
