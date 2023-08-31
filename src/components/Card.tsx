@@ -1,84 +1,67 @@
-import * as React from "react";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import Alert from "@mui/material/Alert";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Snackbar from "@mui/material/Snackbar";
+import SnackbarContent from "@mui/material/SnackbarContent";
+import Typography from "@mui/material/Typography";
 import { useState } from "react";
-import { products } from "../../data/index";
+import { Product } from "../../data/index";
 
-export default function ProductCard() {
-  const [showAlerts, setShowAlerts] = useState(
-    Array(products.length).fill(false)
-  );
-  const [alertFadeTimers, setAlertFadeTimers] = useState(
-    Array(products.length).fill(null)
-  );
+interface ProductCardProps {
+  product: Product;
+}
 
-  const handleButtonClick = (index: number) => {
-    const newShowAlerts = [...showAlerts];
-    newShowAlerts[index] = true;
-    setShowAlerts(newShowAlerts);
+export default function ProductCard({ product }: ProductCardProps) {
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
-    if (alertFadeTimers[index]) {
-      clearTimeout(alertFadeTimers[index]);
-    }
+  const handleButtonClick = (index: string) => {
+    setSnackbarMessage("Product added to cart!");
+    setShowSnackbar(true);
 
-    const timer = setTimeout(() => {
-      newShowAlerts[index] = false;
-      setShowAlerts(newShowAlerts);
-    }, 1000);
+    console.log(index);
 
-    setAlertFadeTimers((prevTimers) => {
-      const updatedTimers = [...prevTimers];
-      updatedTimers[index] = timer;
-      return updatedTimers;
-    });
+    setTimeout(() => {
+      setShowSnackbar(false);
+    }, 2000);
   };
 
   return (
     <>
-      {products.map((product, index) => (
-        <Card key={product.id} sx={{ maxWidth: 345 }}>
-          <CardMedia
-            component="img"
-            height="400"
-            image={product.image}
-            alt={product.title}
-          />
-          <CardContent>
-            <br />
-            <Typography
-              display="flex"
-              justifyContent="space-around"
-              alignItems="center"
+      <Card key={product.id} sx={{ maxWidth: 345 }}>
+        <CardMedia
+          component="img"
+          height="400"
+          image={product.image}
+          alt={product.title}
+        />
+        <CardContent>
+          <br />
+          <Typography
+            display="flex"
+            justifyContent="space-around"
+            alignItems="center"
+          >
+            {product.price} $
+            <Button
+              size="medium"
+              variant="contained"
+              onClick={() => handleButtonClick(product.id)}
             >
-              {product.price} kr
-              <Button
-                size="medium"
-                variant="contained"
-                onClick={() => handleButtonClick(index)}
-              >
-                Add to cart
-              </Button>
-            </Typography>
-            <br />
-            {/* alert to show when clicking add to cart */}
-            <div className={`fade-alert ${showAlerts[index] ? "show" : ""}`}>
-              <Alert
-                data-cy="added-to-cart-toast"
-                severity="success"
-                color="info"
-              >
-                Product added to cart!
-              </Alert>
-            </div>
-          </CardContent>
-          <CardActions disableSpacing></CardActions>
-        </Card>
-      ))}
+              Add to cart
+            </Button>
+          </Typography>
+        </CardContent>
+      </Card>
+
+      <Snackbar
+        open={showSnackbar}
+        autoHideDuration={2000}
+        onClose={() => setShowSnackbar(false)}
+      >
+        <SnackbarContent message={snackbarMessage} />
+      </Snackbar>
     </>
   );
 }

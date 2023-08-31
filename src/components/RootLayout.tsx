@@ -23,14 +23,9 @@ const StyledLogoImage = styled("img")({
   height: "auto",
 });
 
-const StyledMainContainer = styled(Container)({
-  backgroundColor: "#fafaf8",
-  display: "flex",
-  justifyContent: "space-evenly",
-});
-
-const StyledFooterContainer = styled(Container)({
+const StyledFooterBox = styled(Box)({
   position: "relative",
+  padding: "1rem",
   bottom: "0",
   width: "100%",
   height: "2.5rem",
@@ -57,10 +52,9 @@ export default function RootLayout() {
       </header>
       <main>
         <Outlet />
-        <Card />
       </main>
       <footer>
-        <StyledFooterContainer>FOOTER</StyledFooterContainer>
+        <StyledFooterBox>FOOTER</StyledFooterBox>
       </footer>
     </div>
   );
