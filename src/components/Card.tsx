@@ -10,15 +10,37 @@ import { useState } from "react";
 import { products } from "../../data/index";
 
 export default function ProductCard() {
-  const [showAlert, setShowAlert] = useState(false);
+  const [showAlerts, setShowAlerts] = useState(
+    Array(products.length).fill(false)
+  );
+  const [alertFadeTimers, setAlertFadeTimers] = useState(
+    Array(products.length).fill(null)
+  );
 
-  const handleButtonClick = () => {
-    setShowAlert(true);
+  const handleButtonClick = (index: number) => {
+    const newShowAlerts = [...showAlerts];
+    newShowAlerts[index] = true;
+    setShowAlerts(newShowAlerts);
+
+    if (alertFadeTimers[index]) {
+      clearTimeout(alertFadeTimers[index]);
+    }
+
+    const timer = setTimeout(() => {
+      newShowAlerts[index] = false;
+      setShowAlerts(newShowAlerts);
+    }, 1000);
+
+    setAlertFadeTimers((prevTimers) => {
+      const updatedTimers = [...prevTimers];
+      updatedTimers[index] = timer;
+      return updatedTimers;
+    });
   };
 
   return (
     <>
-      {products.map((product) => (
+      {products.map((product, index) => (
         <Card key={product.id} sx={{ maxWidth: 345 }}>
           <CardMedia
             component="img"
@@ -37,14 +59,14 @@ export default function ProductCard() {
               <Button
                 size="medium"
                 variant="contained"
-                onClick={handleButtonClick}
+                onClick={() => handleButtonClick(index)}
               >
                 Add to cart
               </Button>
             </Typography>
             <br />
             {/* alert to show when clicking add to cart */}
-            {showAlert && (
+            <div className={`fade-alert ${showAlerts[index] ? "show" : ""}`}>
               <Alert
                 data-cy="added-to-cart-toast"
                 severity="success"
@@ -52,7 +74,7 @@ export default function ProductCard() {
               >
                 Product added to cart!
               </Alert>
-            )}
+            </div>
           </CardContent>
           <CardActions disableSpacing></CardActions>
         </Card>
