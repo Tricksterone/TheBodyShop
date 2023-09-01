@@ -17,10 +17,13 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@hookform/resolvers": "^3.3.1",
     "@mui/icons-material": "^5.14.7",
     "@mui/material": "^5.14.6",
     "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0"
+    "react-dom": "^17.0.0 || ^18.0.0",
+    "react-hook-form": "^7.45.4",
+    "zod": "^3.22.2"
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0",
