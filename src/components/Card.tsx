@@ -7,6 +7,7 @@ import Snackbar from "@mui/material/Snackbar";
 import SnackbarContent from "@mui/material/SnackbarContent";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Product } from "../../data/index";
 
 interface ProductCardProps {
@@ -45,13 +46,15 @@ export default function ProductCard({ product }: ProductCardProps) {
             </Box>
           }
         />
-        <CardMedia
-          title={product.title}
-          component="img"
-          height="400"
-          image={product.image}
-          alt={product.title}
-        />
+        <Link to={`/product/${product.id}`}>
+          <CardMedia
+            title={product.title}
+            component="img"
+            height="400"
+            image={product.image}
+            alt={product.title}
+          />
+        </Link>
         <CardContent>
           <br />
           <Typography

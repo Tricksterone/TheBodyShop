@@ -13,6 +13,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import ProductDescription from "./pages/ProductDescription";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route path="cart" element={<Cart />} />
       <Route path="checkout" element={<Checkout />} />
       <Route path="confirmation" element={<Confirmation />} />
+      <Route path="/product/:id" element={<ProductDescription />} />
       <Route path="*" element={<div>Not Found </div>} />
     </Route>
   )
