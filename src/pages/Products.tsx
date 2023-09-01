@@ -1,6 +1,6 @@
 import { Box, Container, Grid, styled } from "@mui/material";
-import Card from "../components/Card";
 import { products } from "../../data/index";
+import Card from "../components/Card";
 
 const StyledMainBox = styled(Box)({
   backgroundColor: "#fafaf8",
@@ -67,7 +67,15 @@ export default function Products() {
         <StyledProductsContainer>
           <Grid container spacing={2}>
             {products.map((product) => (
-              <Grid key={product.id} item xs={12} sm={6} md={4} lg={4}>
+              <Grid
+                data-cy="product"
+                key={product.id}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={4}
+              >
                 <Card product={product} />
               </Grid>
             ))}
