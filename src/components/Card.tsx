@@ -9,20 +9,23 @@ import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Product } from "../../data/index";
+import { useCart } from "../context/CartContext";
 
 interface ProductCardProps {
   product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const { increaseCartQuantity, getItemQuantity } = useCart();
+  const quantity = getItemQuantity(product.id);
+
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
   const handleButtonClick = (index: string) => {
-    setSnackbarMessage("Product added to cart!");
+    increaseCartQuantity(index);
+    setSnackbarMessage("Product has been added to cart!");
     setShowSnackbar(true);
-
-    console.log(index);
 
     setTimeout(() => {
       setShowSnackbar(false);
