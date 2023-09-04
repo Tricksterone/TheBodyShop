@@ -7,6 +7,7 @@ type cartItem = CartItem;
 type CartContext = {
   getItemQuantity: (id: string) => number;
   increaseCartQuantity: (id: string) => void;
+  decreaseCartQuantity: (id: string) => void;
   removeFromCart: (id: string) => void;
   removeAllFromCart: () => void;
   cartQuantity: number;
@@ -65,6 +66,36 @@ export function CartProvider(props: PropsWithChildren) {
     });
   }
 
+  function decreaseCartQuantity(id: string) {
+    setCartItems((currItems: cartItem[]) => {
+      const existingItem = currItems.find((item) => item.id === id);
+
+      if (existingItem == null) {
+        const product = getProductById(id);
+        if (product) {
+          const newItem: cartItem = {
+            id,
+            image: product.image,
+            title: product.title,
+            description: product.description,
+            price: product.price,
+            quantity: 1,
+          };
+          return [...currItems, newItem];
+        }
+      } else {
+        return currItems.map((item) => {
+          if (item.id === id) {
+            return { ...item, quantity: item.quantity - 1 };
+          } else {
+            return item;
+          }
+        });
+      }
+      return currItems;
+    });
+  }
+
   function removeFromCart(id: string) {
     setCartItems((currItems) => {
       return currItems.filter((item) => item.id !== id);
@@ -81,6 +112,7 @@ export function CartProvider(props: PropsWithChildren) {
       value={{
         getItemQuantity,
         increaseCartQuantity,
+        decreaseCartQuantity,
         removeFromCart,
         removeAllFromCart,
         cartItems,
