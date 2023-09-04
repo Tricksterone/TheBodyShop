@@ -17,23 +17,25 @@ const OrderDetailsSchema = z.object({
   name: z
     .string()
     .min(2, { message: "name too short" })
-    .regex(new RegExp(/^[a-zA-Z]+[-'s]?[a-zA-Z ]+$/), {
+    .regex(new RegExp(/^[a-zA-ZåäöÅÄÖ]+[-'s]?[a-zA-ZåäöÅÄÖ ]+$/), {
       message: "Only A-Z allowed",
     }),
   email: z.coerce.string().email({ message: "email must contain @" }),
   phone: z
     .string()
     .min(4, { message: "Phone number too short" })
-    .refine(
-      (val) => /^\d+$/.test(val), //kan man använda .number istället? lägg till max
-      {
-        message: "Invalid phone number format",
-      }
-    ),
+    .refine((val) => /^\d+$/.test(val), {
+      message: "Invalid phone number format",
+    }),
 
   address: z.string().min(4),
   zipcode: z.coerce.number().gte(10000).lte(99999),
-  city: z.string().min(2),
+  city: z
+    .string()
+    .min(2, { message: "name too short" })
+    .regex(new RegExp(/^[a-zA-ZåäöÅÄÖ]+[-'s]?[a-zA-ZåäöÅÄÖ ]+$/), {
+      message: "Only A-Z allowed",
+    }),
   orderNumber: z.coerce.number().optional(), // Anges inte förrän efter zodResolver gjort sin grej
 });
 
@@ -215,18 +217,3 @@ function CheckoutPage() {
 }
 
 export default CheckoutPage;
-
-//    data-cy="customer-form"` formulär för att fylla i kunduppgifter på checkout-sidan.
-// - `data-cy="customer-name"` kundens namn (som fylls i på checkout-sidan).
-// - `data-cy="customer-address"` kundens gatuadress (som fylls i på checkout-sidan).
-// - `data-cy="customer-zipcode"` kundens postnummer (som fylls i på checkout-sidan).
-// - `data-cy="customer-city"` kundens stad (som fylls i på checkout-sidan).
-// - `data-cy="customer-email"` kundens emailadress (som fylls i på checkout-sidan).
-// - `data-cy="customer-phone"` kundens telefonnummer (som fylls i på checkout-sidan).
-
-// - `data-cy="customer-name-error"` felmeddelande vid felaktigt angivet namn.
-// - `data-cy="customer-address-error"` felmeddelande vid felaktigt angiven adress.
-// - `data-cy="customer-zipcode-error"` felmeddelande vid felaktigt angivet postnummer.
-// - `data-cy="customer-city-error"` felmeddelande vid felaktigt angiven stad.
-// - `data-cy="customer-email-error"` felmeddelande vid felaktigt angiven emailadress.
-// - `data-cy="customer-phone-error"` felmeddelande vid felaktigt angivet telefonnummer.
