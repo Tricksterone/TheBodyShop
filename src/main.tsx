@@ -1,19 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import "./index.css";
-import RootLayout from "./components/RootLayout";
-import Products from "./pages/Products";
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import Confirmation from "./pages/Confirmation";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
 } from "react-router-dom";
+import RootLayout from "./components/RootLayout";
+import { CartProvider } from "./context/CartContext";
+import "./index.css";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import Confirmation from "./pages/Confirmation";
 import ProductDescription from "./pages/ProductDescription";
+import Products from "./pages/Products";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +30,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <CartProvider>
+      <RouterProvider router={router} />
+    </CartProvider>
   </React.StrictMode>
 );
