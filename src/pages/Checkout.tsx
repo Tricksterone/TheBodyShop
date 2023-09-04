@@ -1,17 +1,17 @@
-import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  Container,
-  Grid,
-  Typography,
-  TextField,
-  Button,
   Box,
+  Button,
+  Container,
+  FormHelperTextProps,
+  Grid,
+  TextField,
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { useNavigate } from "react-router-dom";
+import { z } from "zod";
 
 const OrderDetailsSchema = z.object({
   name: z
@@ -20,21 +20,20 @@ const OrderDetailsSchema = z.object({
     .regex(new RegExp(/^[a-zA-Z]+[-'s]?[a-zA-Z ]+$/), {
       message: "Only A-Z allowed",
     }),
-  email: z.coerce.string().email({ message: "email" }),
+  email: z.coerce.string().email({ message: "email must contain @" }),
   phone: z
     .string()
     .min(4, { message: "Phone number too short" })
     .refine(
-      (val) => /^\d+$/.test(val), //kan man använda .number istället?
+      (val) => /^\d+$/.test(val), //kan man använda .number istället? lägg till max
       {
         message: "Invalid phone number format",
       }
     ),
 
   address: z.string().min(4),
-  zipcode: z.coerce.number().gte(3),
+  zipcode: z.coerce.number().gte(10000).lte(99999),
   city: z.string().min(2),
-  totalcost: z.coerce.number().optional(), //kommer sen
   orderNumber: z.coerce.number().optional(), // Anges inte förrän efter zodResolver gjort sin grej
 });
 
@@ -80,45 +79,63 @@ function CheckoutPage() {
         <Typography variant="h6" gutterBottom>
           Personal Details Form
         </Typography>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form data-cy="customer-form" onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <TextField
-                    required
                     error={Boolean(formState.errors.name)}
                     helperText={formState.errors.name?.message}
+                    FormHelperTextProps={
+                      {
+                        "data-cy": "customer-name-error",
+                      } as FormHelperTextProps
+                    }
                     label="Full Name"
                     id="name"
+                    autoComplete="name"
                     fullWidth
                     margin="normal"
+                    inputProps={{ "data-cy": "customer-name" }}
                     {...register("name")}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    required
                     error={Boolean(formState.errors.email)}
                     helperText={formState.errors.email?.message}
+                    FormHelperTextProps={
+                      {
+                        "data-cy": "customer-email-error",
+                      } as FormHelperTextProps
+                    }
                     label="E-mail"
-                    // id="email"
+                    id="email"
+                    autoComplete="email"
                     type="email"
                     fullWidth
                     margin="normal"
+                    inputProps={{ "data-cy": "customer-email" }}
                     {...register("email")}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    required
                     error={Boolean(formState.errors.phone)}
                     helperText={formState.errors.phone?.message}
-                    // id="phone"
+                    FormHelperTextProps={
+                      {
+                        "data-cy": "customer-phone-error",
+                      } as FormHelperTextProps
+                    }
+                    id="phone"
+                    autoComplete="tel"
                     label="Phone number"
                     type="tel"
                     fullWidth
                     margin="normal"
+                    inputProps={{ "data-cy": "customer-phone" }}
                     {...register("phone")}
                   />
                 </Grid>
@@ -126,44 +143,68 @@ function CheckoutPage() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                required
                 error={Boolean(formState.errors.address)}
                 helperText={formState.errors.address?.message}
-                // id="address"
+                FormHelperTextProps={
+                  {
+                    "data-cy": "customer-address-error",
+                  } as FormHelperTextProps
+                }
+                id="address"
+                autoComplete="street-address"
                 label="Address"
                 fullWidth
                 margin="normal"
+                inputProps={{ "data-cy": "customer-address" }}
                 {...register("address")}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                required
                 error={Boolean(formState.errors.zipcode)}
                 helperText={formState.errors.zipcode?.message}
+                FormHelperTextProps={
+                  {
+                    "data-cy": "customer-zipcode-error",
+                  } as FormHelperTextProps
+                }
                 id="zipcode"
+                autoComplete="postal-code"
                 label="Zip-code"
                 type="number"
                 fullWidth
                 margin="normal"
+                inputProps={{ "data-cy": "customer-zipcode" }}
                 {...register("zipcode")}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                required
                 error={Boolean(formState.errors.city)}
                 helperText={formState.errors.city?.message}
+                FormHelperTextProps={
+                  {
+                    "data-cy": "customer-city-error",
+                  } as FormHelperTextProps
+                }
                 id="city"
+                autoComplete="address-level2"
                 label="City"
                 fullWidth
                 margin="normal"
+                inputProps={{ "data-cy": "customer-city" }}
                 {...register("city")}
               />
             </Grid>
           </Grid>
           <Box mt={4}>
-            <Button variant="contained" color="primary" type="submit">
+            <Button
+              data-cy="product-buy-button"
+              style={{ marginBottom: "10px" }}
+              variant="contained"
+              color="primary"
+              type="submit"
+            >
               Buy
             </Button>
           </Box>
@@ -174,3 +215,18 @@ function CheckoutPage() {
 }
 
 export default CheckoutPage;
+
+//    data-cy="customer-form"` formulär för att fylla i kunduppgifter på checkout-sidan.
+// - `data-cy="customer-name"` kundens namn (som fylls i på checkout-sidan).
+// - `data-cy="customer-address"` kundens gatuadress (som fylls i på checkout-sidan).
+// - `data-cy="customer-zipcode"` kundens postnummer (som fylls i på checkout-sidan).
+// - `data-cy="customer-city"` kundens stad (som fylls i på checkout-sidan).
+// - `data-cy="customer-email"` kundens emailadress (som fylls i på checkout-sidan).
+// - `data-cy="customer-phone"` kundens telefonnummer (som fylls i på checkout-sidan).
+
+// - `data-cy="customer-name-error"` felmeddelande vid felaktigt angivet namn.
+// - `data-cy="customer-address-error"` felmeddelande vid felaktigt angiven adress.
+// - `data-cy="customer-zipcode-error"` felmeddelande vid felaktigt angivet postnummer.
+// - `data-cy="customer-city-error"` felmeddelande vid felaktigt angiven stad.
+// - `data-cy="customer-email-error"` felmeddelande vid felaktigt angiven emailadress.
+// - `data-cy="customer-phone-error"` felmeddelande vid felaktigt angivet telefonnummer.
