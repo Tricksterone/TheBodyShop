@@ -9,6 +9,8 @@ import {
 import RootLayout from "./components/RootLayout";
 import { CartProvider } from "./context/CartContext";
 import "./index.css";
+import Admin from "./pages/Admin";
+import AdminForm from "./pages/AdminForm";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Confirmation from "./pages/Confirmation";
@@ -23,6 +25,8 @@ const router = createBrowserRouter(
       <Route path="checkout" element={<Checkout />} />
       <Route path="confirmation" element={<Confirmation />} />
       <Route path="/product/:id" element={<ProductDescription />} />
+      <Route path="admin" element={<Admin />} />
+      <Route path="adminform" element={<AdminForm />} />
       <Route path="*" element={<div>Not Found </div>} />
     </Route>
   )

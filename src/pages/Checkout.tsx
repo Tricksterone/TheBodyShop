@@ -78,7 +78,7 @@ function CheckoutPage() {
       </Container>
 
       <Container>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="h6" gutterBottom marginTop={2}>
           Personal Details Form
         </Typography>
         <form data-cy="customer-form" onSubmit={handleSubmit(onSubmit)}>
