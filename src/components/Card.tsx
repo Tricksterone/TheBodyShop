@@ -17,7 +17,6 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { increaseCartQuantity, getItemQuantity } = useCart();
-  const quantity = getItemQuantity(product.id);
 
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
