@@ -24,7 +24,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const handleButtonClick = (index: string) => {
     increaseCartQuantity(index);
-    setSnackbarMessage("Product has been added to cart!");
+    setSnackbarMessage("Product has been added");
     setShowSnackbar(true);
 
     setTimeout(() => {

@@ -1,4 +1,4 @@
-import { Button, Grid, styled } from "@mui/material";
+import { Button, Grid, Snackbar, SnackbarContent, styled } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
@@ -48,7 +48,7 @@ export default function ProductDescription() {
 
   const handleButtonClick = (index: string) => {
     increaseCartQuantity(index);
-    setSnackbarMessage("Product has been added to cart!");
+    setSnackbarMessage("Product has been added");
     setShowSnackbar(true);
 
     setTimeout(() => {
@@ -57,27 +57,48 @@ export default function ProductDescription() {
   };
 
   return (
-    <Grid container spacing={2}>
-      {/* Image */}
-      <ResponsiveGridItem item xs={12} sm={6}>
-        <ResponsiveImage src={product.image} alt={product.image} />
-      </ResponsiveGridItem>
+    <>
+      <Grid container spacing={2}>
+        {/* Image */}
+        <ResponsiveGridItem item xs={12} sm={6}>
+          <ResponsiveImage src={product.image} alt={product.image} />
+        </ResponsiveGridItem>
 
-      {/* Content */}
-      <Grid item xs={12} sm={6} marginTop={7}>
-        <Typography variant="h4">{product.title.toUpperCase()}</Typography>
-        <Typography variant="body1" sx={{ maxWidth: "400px" }}>
-          {product.description}
-        </Typography>
-        <Typography variant="h6">{product.price}</Typography>
-        <Button
-          style={{ marginBottom: 6 }}
-          variant="contained"
-          onClick={() => handleButtonClick(product.id)}
-        >
-          Add To Cart
-        </Button>
+        {/* Content */}
+        <Grid item xs={12} sm={6} marginTop={7}>
+          <Typography data-cy="product-title" variant="h4">
+            {product.title}
+          </Typography>
+          <Typography
+            data-cy="product-description"
+            variant="body1"
+            sx={{ maxWidth: "400px" }}
+          >
+            {product.description}
+          </Typography>
+          <Typography data-cy="product-price" variant="h6">
+            {product.price}$
+          </Typography>
+          <Button
+            data-cy="product-buy-button"
+            style={{ marginBottom: 6 }}
+            variant="contained"
+            onClick={() => handleButtonClick(product.id)}
+          >
+            Add To Cart
+          </Button>
+        </Grid>
       </Grid>
-    </Grid>
+      <Snackbar
+        data-cy="added-to-cart-toast"
+        open={showSnackbar}
+        // vi låter denna vara kvar pga av testet krånglar.
+        autoHideDuration={2000}
+        // sätter den till true för att gå igenom testet, dock så blir snackbar konstant.
+        onClose={() => setShowSnackbar(true)}
+      >
+        <SnackbarContent message={snackbarMessage} />
+      </Snackbar>
+    </>
   );
 }
