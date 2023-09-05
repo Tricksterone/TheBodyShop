@@ -78,13 +78,6 @@ export default function RootLayout() {
               </Typography>
             </StyledAppbarBox>
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <IconButton
-                size="large"
-                sx={{ color: "red" }}
-                onClick={removeAllFromCart}
-              >
-                <PestControlIcon />
-              </IconButton>
               <IconButton color="inherit" aria-label="profile">
                 <AccountCircleIcon />
               </IconButton>
