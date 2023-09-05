@@ -1,3 +1,6 @@
+import { Paper } from "@mui/material";
+import { Container } from "@mui/system";
+
 export default function Confirmation() {
   const storedOrderDetails = localStorage.getItem("orderDetails");
   let orderDetails;
@@ -13,17 +16,29 @@ export default function Confirmation() {
     );
   }
   return (
-    <div>
-      <h1>Confirmation page</h1>
-      {orderDetails && (
+    <Container>
+      <Container>
         <div>
-          <h2>Your Order Details:</h2>
-          <p>Name: {orderDetails.name}</p>
-          <p>Email: {orderDetails.email}</p>
-          <p>Phone: {orderDetails.phone}</p>
-          <p>Ska även visa produktsammanfattning?</p>
+          <h1>Confirmation page</h1>
+          <Paper
+            elevation={6}
+            sx={{ padding: "4px", marginBottom: "10px", maxWidth: "500px" }}
+          >
+            {orderDetails && (
+              <Container style={{ margin: "16px 0px" }}>
+                <h2>Your Order Details:</h2>
+                <p>Name: {orderDetails.name}</p>
+                <p>Address: {orderDetails.address}</p>
+                <p>ZipCode: {orderDetails.zipcode}</p>
+                <p>City: {orderDetails.city}</p>
+                <p>Email: {orderDetails.email}</p>
+                <p>Phone: {orderDetails.phone}</p>
+                <p>Ska även visa produktsammanfattning?</p>
+              </Container>
+            )}
+          </Paper>
         </div>
-      )}
-    </div>
+      </Container>
+    </Container>
   );
 }
