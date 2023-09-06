@@ -41,7 +41,7 @@ const StyledFooterBox = styled(Box)({
   padding: "1rem",
   bottom: "0",
   width: "100%",
-  height: "2.5rem",
+  height: "1rem",
   backgroundColor: "#A3D4DB",
   color: "white",
 });
@@ -84,17 +84,9 @@ export default function RootLayout() {
             </StyledAppbarBox>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <IconButton
-                size="large"
-                sx={{ color: "red" }}
-                onClick={removeAllFromCart}
-              >
-                <PestControlIcon />
-              </IconButton>
-              <IconButton
                 color="inherit"
                 aria-label="profile"
                 onClick={handleAdminClick}
-              >
                 <AccountCircleIcon />
               </IconButton>
               <IconButton

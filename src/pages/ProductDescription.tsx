@@ -1,17 +1,21 @@
-import { Button, Grid, styled } from "@mui/material";
+import { Grid, Snackbar, SnackbarContent, styled } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { products } from "../../data/index";
+import QuantityButton from "../components/QuantityButton";
 import { useCart } from "../context/CartContext";
 
 export default function ProductDescription() {
-  const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity } =
-    useCart();
+  const {
+    getItemQuantity,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+  } = useCart();
   const { id } = useParams();
-  const location = useLocation();
 
-  const product = products.find((p) => p.id === id);
+  let product = products.find((p) => p.id === id);
 
   const ResponsiveGridItem = styled(Grid)(({ theme }) => ({
     display: "flex",
@@ -43,41 +47,32 @@ export default function ProductDescription() {
     return <div>Product not found.</div>;
   }
 
-  const [showSnackbar, setShowSnackbar] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-
-  const handleButtonClick = (index: string) => {
-    increaseCartQuantity(index);
-    setSnackbarMessage("Product has been added to cart!");
-    setShowSnackbar(true);
-
-    setTimeout(() => {
-      setShowSnackbar(false);
-    }, 2000);
-  };
-
   return (
-    <Grid container spacing={2}>
-      {/* Image */}
-      <ResponsiveGridItem item xs={12} sm={6}>
-        <ResponsiveImage src={product.image} alt={product.image} />
-      </ResponsiveGridItem>
+    <>
+      <Grid container spacing={2}>
+        {/* Image */}
+        <ResponsiveGridItem item xs={12} sm={6}>
+          <ResponsiveImage src={product.image} alt={product.image} />
+        </ResponsiveGridItem>
 
-      {/* Content */}
-      <Grid item xs={12} sm={6} marginTop={7}>
-        <Typography variant="h4">{product.title.toUpperCase()}</Typography>
-        <Typography variant="body1" sx={{ maxWidth: "400px" }}>
-          {product.description}
-        </Typography>
-        <Typography variant="h6">{product.price}</Typography>
-        <Button
-          style={{ marginBottom: 6 }}
-          variant="contained"
-          onClick={() => handleButtonClick(product.id)}
-        >
-          Add To Cart
-        </Button>
+        {/* Content */}
+        <Grid item xs={12} sm={6} marginTop={7}>
+          <Typography data-cy="product-title" variant="h4">
+            {product.title}
+          </Typography>
+          <Typography
+            data-cy="product-description"
+            variant="body1"
+            sx={{ maxWidth: "400px" }}
+          >
+            {product.description}
+          </Typography>
+          <Typography data-cy="product-price" variant="h6">
+            {product.price}$
+          </Typography>
+          <QuantityButton product={product} />
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 }
