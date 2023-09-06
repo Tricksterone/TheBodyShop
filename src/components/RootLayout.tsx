@@ -1,5 +1,4 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import PestControlIcon from "@mui/icons-material/PestControl";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
   AppBar,
@@ -87,6 +86,7 @@ export default function RootLayout() {
                 color="inherit"
                 aria-label="profile"
                 onClick={handleAdminClick}
+              >
                 <AccountCircleIcon />
               </IconButton>
               <IconButton
