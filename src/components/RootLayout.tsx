@@ -1,6 +1,6 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PestControlIcon from "@mui/icons-material/PestControl";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
   AppBar,
   Badge,
@@ -8,8 +8,8 @@ import {
   IconButton,
   Toolbar,
   Typography,
-  useTheme,
   styled,
+  useTheme,
 } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
@@ -57,6 +57,11 @@ export default function RootLayout() {
     navigate("/checkout");
   };
 
+  const handleAdminClick = () => {
+    // Navigerar till checkout-page
+    navigate("/admin");
+  };
+
   const handleLogoClick = () => {
     // Navigerar till homepage
     navigate("/");
@@ -78,7 +83,10 @@ export default function RootLayout() {
               </Typography>
             </StyledAppbarBox>
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <IconButton color="inherit" aria-label="profile">
+              <IconButton
+                color="inherit"
+                aria-label="profile"
+                onClick={handleAdminClick}
                 <AccountCircleIcon />
               </IconButton>
               <IconButton
