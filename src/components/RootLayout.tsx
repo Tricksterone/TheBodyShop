@@ -47,7 +47,6 @@ const StyledFooterBox = styled(Box)({
 
 export default function RootLayout() {
   const theme = useTheme();
-  const { removeAllFromCart } = useCart();
   const { cartQuantity } = useCart();
   const navigate = useNavigate();
 
@@ -86,6 +85,7 @@ export default function RootLayout() {
                 color="inherit"
                 aria-label="profile"
                 onClick={handleAdminClick}
+                data-cy="admin-link"
               >
                 <AccountCircleIcon />
               </IconButton>
