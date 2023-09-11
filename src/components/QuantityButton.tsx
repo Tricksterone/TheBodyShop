@@ -75,7 +75,7 @@ export default function QuantityButton({ product }: ProductCardProps) {
         ) : (
           <FlexBoxBtn>
             <AmountBtns>
-              <IconButton onClick={() => decreaseCartQuantity(product.id)}>
+              <IconButton onClick={() => decreaseCartQuantity(product.id)} data-cy="decrease-quantity-button">
                 <RemoveCircleOutlinedIcon sx={{ color: "lightblue" }}>
                   -
                 </RemoveCircleOutlinedIcon>
@@ -85,7 +85,7 @@ export default function QuantityButton({ product }: ProductCardProps) {
                   {getItemQuantity(product.id)} in cart
                 </Typography>{" "}
               </Box>
-              <IconButton onClick={() => handleButtonClick(product.id)}>
+              <IconButton onClick={() => handleButtonClick(product.id)} data-cy="increase-quantity-button">
                 <AddCircleIcon
                   sx={{ color: "lightblue" }}
                   data-cy="product-buy-button"

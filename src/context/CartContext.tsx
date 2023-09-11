@@ -69,7 +69,7 @@ export function CartProvider(props: PropsWithChildren) {
   function decreaseCartQuantity(id: string) {
     setCartItems((currItems: cartItem[]) => {
       const existingItem = currItems.find((item) => item.id === id);
-
+  
       if (existingItem == null) {
         const product = getProductById(id);
         if (product) {
@@ -84,13 +84,20 @@ export function CartProvider(props: PropsWithChildren) {
           return [...currItems, newItem];
         }
       } else {
-        return currItems.map((item) => {
+        const updatedItems = currItems.map((item) => {
           if (item.id === id) {
-            return { ...item, quantity: item.quantity - 1 };
+            const updatedQuantity = item.quantity - 1;
+            if (updatedQuantity <= 0) {
+              return null;
+            } else {
+              return { ...item, quantity: updatedQuantity };
+            }
           } else {
             return item;
           }
         });
+  
+        return updatedItems.filter((item) => item !== null) as cartItem[];
       }
       return currItems;
     });
