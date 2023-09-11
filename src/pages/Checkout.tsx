@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
+import CartSummary from "../components/CartSummary";
 
 const OrderDetailsSchema = z.object({
   name: z
@@ -72,9 +73,7 @@ function CheckoutPage() {
   return (
     <Container>
       <Container>
-        <Typography variant="h6" gutterBottom>
-          * Produktsammanfattning här *
-        </Typography>
+        <CartSummary />
       </Container>
 
       <Container>
