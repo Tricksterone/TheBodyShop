@@ -9,7 +9,7 @@ export default function ConfirmationSummary() {
       {cartItems.map((item) => (
         <ConfirmationItem key={item.id} {...item} />
       ))}
-      <Typography variant="h5" fontWeight="bold" data-cy="total-price">
+      <Typography variant="h6" fontWeight="bold" data-cy="total-price">
         Total Price payed: $
         {cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)}
       </Typography>

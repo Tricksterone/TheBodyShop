@@ -25,12 +25,10 @@ export default function Confirmation() {
             elevation={6}
             sx={{ padding: "4px", marginBottom: "10px", maxWidth: "500px" }}
           >
-            <Container style={{ margin: "16px 0px" }}>
-              <ConfirmationSummary />
-            </Container>
             {orderDetails && (
               <Container>
                 <h2>Your Order Details:</h2>
+                <ConfirmationSummary />
                 <p>Order number: {orderDetails.orderNumber}</p>
                 <p>Name: {orderDetails.name}</p>
                 <p>Address: {orderDetails.address}</p>
