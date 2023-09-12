@@ -4,6 +4,7 @@ import ConfirmationSummary from "../components/ConfirmationSummary";
 
 export default function Confirmation() {
   const storedOrderDetails = localStorage.getItem("orderDetails");
+
   let orderDetails;
   if (storedOrderDetails) {
     orderDetails = JSON.parse(storedOrderDetails);
@@ -16,6 +17,7 @@ export default function Confirmation() {
       </div>
     );
   }
+
   return (
     <Container>
       <Container>
