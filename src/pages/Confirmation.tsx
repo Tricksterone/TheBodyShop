@@ -1,5 +1,6 @@
 import { Paper } from "@mui/material";
 import { Container } from "@mui/system";
+import ConfirmationSummary from "../components/ConfirmationSummary";
 
 export default function Confirmation() {
   const storedOrderDetails = localStorage.getItem("orderDetails");
@@ -24,8 +25,11 @@ export default function Confirmation() {
             elevation={6}
             sx={{ padding: "4px", marginBottom: "10px", maxWidth: "500px" }}
           >
+            <Container style={{ margin: "16px 0px" }}>
+              <ConfirmationSummary />
+            </Container>
             {orderDetails && (
-              <Container style={{ margin: "16px 0px" }}>
+              <Container>
                 <h2>Your Order Details:</h2>
                 <p>Name: {orderDetails.name}</p>
                 <p>Address: {orderDetails.address}</p>
