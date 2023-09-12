@@ -37,7 +37,6 @@ export default function Confirmation() {
                 <p>City: {orderDetails.city}</p>
                 <p>Email: {orderDetails.email}</p>
                 <p>Phone: {orderDetails.phone}</p>
-                <p>Ska även visa produktsammanfattning?</p>
               </Container>
             )}
           </Paper>
