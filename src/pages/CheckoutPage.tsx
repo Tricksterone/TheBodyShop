@@ -8,7 +8,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -38,7 +37,9 @@ const OrderDetailsSchema = z.object({
     .regex(new RegExp(/^[a-zA-ZåäöÅÄÖ]+[-'s]?[a-zA-ZåäöÅÄÖ ]+$/), {
       message: "Only A-Z allowed",
     }),
+
   orderNumber: z.coerce.number().optional(), // Anges inte förrän efter zodResolver gjort sin grej
+  orderPlaced: z.boolean().default(false),
 });
 
 type OrderDetails = z.infer<typeof OrderDetailsSchema>;
@@ -50,18 +51,18 @@ function CheckoutPage() {
   const navigate = useNavigate();
   const { removeAllFromCart } = useCart();
 
-  const [orderPlaced, setOrderPlaced] = useState(false);
+  // const [orderPlaced, setOrderPlaced] = useState(false);
 
   const onSubmit = (formData: OrderDetails) => {
-    if (orderPlaced) {
+    if (formData.orderPlaced) {
       console.log("An order has already been placed."); //Detta behöver också visas på sidan
       return;
     }
 
     const orderNumber = generateUniqueOrderNumber();
-    const updatedOrderDetails = { ...formData, orderNumber };
+    const updatedOrderDetails = { ...formData, orderNumber, orderPlaced: true };
 
-    setOrderPlaced(true);
+    // setOrderPlaced(true);
     navigate("/confirmation");
     removeAllFromCart();
 
@@ -70,7 +71,7 @@ function CheckoutPage() {
   };
 
   const generateUniqueOrderNumber = () => {
-    return Math.floor(Math.random() * 100 + 1);
+    return Math.floor(Math.random() * 1000 + 1);
   };
 
   return (
