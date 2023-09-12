@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import CartSummary from "../components/CartSummary";
+import { useCart } from "../context/CartContext";
 
 const OrderDetailsSchema = z.object({
   name: z
@@ -48,6 +49,7 @@ function CheckoutPage() {
     resolver: zodResolver(OrderDetailsSchema),
   });
   const navigate = useNavigate();
+  const { removeAllFromCart } = useCart();
 
   // const [orderPlaced, setOrderPlaced] = useState(false);
 
@@ -62,6 +64,7 @@ function CheckoutPage() {
 
     // setOrderPlaced(true);
     navigate("/confirmation");
+    removeAllFromCart();
 
     localStorage.setItem("orderDetails", JSON.stringify(updatedOrderDetails));
     console.log("orderDetails:     " + localStorage.getItem("orderDetails"));
