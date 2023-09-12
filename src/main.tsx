@@ -8,26 +8,30 @@ import {
 } from "react-router-dom";
 import RootLayout from "./components/RootLayout";
 import { CartProvider } from "./context/CartContext";
+import { ProductProvider } from "./context/ProductsContext";
 import "./index.css";
-import Admin from "./pages/Admin";
-import AdminForm from "./pages/AdminForm";
+import AdminPage from "./pages/AdminPage";
 import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import Confirmation from "./pages/Confirmation";
-import ProductDescription from "./pages/ProductDescription";
-import Products from "./pages/Products";
+import CheckoutPage from "./pages/CheckoutPage";
+import ConfirmationPage from "./pages/ConfirmationPage";
+import CreateProductPage from "./pages/CreateProductPage";
+import EditProductPage from "./pages/EditProductPage";
+import ProductDescriptionPage from "./pages/ProductDescriptionPage";
+import ProductsPage from "./pages/ProductsPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<RootLayout />}>
-      <Route index element={<Products />} />
+      <Route index element={<ProductsPage />} />
       <Route path="cart" element={<Cart />} />
-      <Route path="checkout" element={<Checkout />} />
-      <Route path="confirmation" element={<Confirmation />} />
-      <Route path="/product/:id" element={<ProductDescription />} />
-      <Route path="admin" element={<Admin />} />
-      <Route path="adminform" element={<AdminForm />} />
-      <Route path="adminform/:id" element={<AdminForm />} />
+      <Route path="checkout" element={<CheckoutPage />} />
+      <Route path="confirmation" element={<ConfirmationPage />} />
+      <Route path="/product/:id" element={<ProductDescriptionPage />} />
+      <Route path="admin">
+        <Route index element={<AdminPage />} />
+        <Route path="product/new" element={<CreateProductPage />} />
+        <Route path="product/:id" element={<EditProductPage />} />
+      </Route>
       <Route path="*" element={<div>Not Found </div>} />
     </Route>
   )
@@ -35,8 +39,10 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <CartProvider>
-      <RouterProvider router={router} />
-    </CartProvider>
+    <ProductProvider>
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
+    </ProductProvider>
   </React.StrictMode>
 );

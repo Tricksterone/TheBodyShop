@@ -1,40 +1,21 @@
 import { Box, CardHeader } from "@mui/material";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Snackbar from "@mui/material/Snackbar";
-import SnackbarContent from "@mui/material/SnackbarContent";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Product } from "../../data/index";
-// import { useCart } from "../context/CartContext";
+import DialogAlert from "./DialogAlert";
 
 interface ProductCardProps {
   product: Product;
 }
 
 export default function AdminProductCard({ product }: ProductCardProps) {
-  //   const { increaseCartQuantity, getItemQuantity } = useCart();
-  //   const quantity = getItemQuantity(product.id);
-
-  const [showSnackbar, setShowSnackbar] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-
-  const handleButtonClick = (index: string) => {
-    // increaseCartQuantity(index); //metod för DELETE here
-    setSnackbarMessage("Product has been deleted");
-    setShowSnackbar(true);
-
-    setTimeout(() => {
-      setShowSnackbar(false);
-    }, 2000);
-  };
-
   return (
     <>
-      <Card data-cy="product-id" key={product.id} sx={{ maxWidth: 345 }}>
+      <Card key={product.id} sx={{ maxWidth: 345 }}>
+        <div data-cy="product-id">{product.id}</div>
         <CardHeader
           data-cy="product-title"
           title={
@@ -49,8 +30,9 @@ export default function AdminProductCard({ product }: ProductCardProps) {
             </Box>
           }
         />
-        <Link to={`/adminform/${product.id}`}>
+        <Link to={`product/${product.id}`}>
           <CardMedia
+            data-cy="admin-edit-product"
             title={product.title}
             component="img"
             height="400"
@@ -67,26 +49,10 @@ export default function AdminProductCard({ product }: ProductCardProps) {
             alignItems="center"
           >
             {product.price} $
-            <Button
-              data-cy="product-buy-button"
-              size="medium"
-              variant="contained"
-              color="error"
-              onClick={() => handleButtonClick(product.id)}
-            >
-              Delete item
-            </Button>
+            <DialogAlert product={product} />
           </Typography>
         </CardContent>
       </Card>
-
-      <Snackbar
-        open={showSnackbar}
-        autoHideDuration={2000}
-        onClose={() => setShowSnackbar(false)}
-      >
-        <SnackbarContent message={snackbarMessage} />
-      </Snackbar>
     </>
   );
 }

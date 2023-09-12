@@ -7,8 +7,8 @@ import {
   styled,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { products } from "../../data/index";
 import AdminCard from "../components/AdminCard";
+import { useProducts } from "../context/ProductsContext";
 
 const StyledMainBox = styled(Box)({
   backgroundColor: "#fafaf8",
@@ -23,12 +23,13 @@ const StyledProductsContainer = styled(Container)({
 
 export default function Admin() {
   const navigate = useNavigate();
+  const { products } = useProducts();
 
   const handleAddItemClick = () => {
-    navigate("/AdminForm");
+    navigate("product/new/");
   };
   return (
-    <div>
+    <>
       <StyledMainBox>
         <Grid container spacing={2} justifyContent="space-evenly">
           <Grid item xs={4}>
@@ -41,6 +42,7 @@ export default function Admin() {
               size="medium"
               variant="contained"
               onClick={handleAddItemClick}
+              data-cy="admin-add-product"
             >
               Add Item
             </Button>
@@ -64,6 +66,6 @@ export default function Admin() {
           </Grid>
         </StyledProductsContainer>
       </StyledMainBox>
-    </div>
+    </>
   );
 }
