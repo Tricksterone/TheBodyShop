@@ -15,7 +15,6 @@ import { z } from "zod";
 import CartSummary from "../components/CartSummary";
 import { useCart } from "../context/CartContext";
 
-
 const OrderDetailsSchema = z.object({
   name: z
     .string()
@@ -69,7 +68,6 @@ function CheckoutPage() {
     localStorage.setItem("orderDetails", JSON.stringify(updatedOrderDetails));
     console.log("orderDetails:     " + localStorage.getItem("orderDetails"));
   };
-
 
   const generateUniqueOrderNumber = () => {
     return Math.floor(Math.random() * 100 + 1);
