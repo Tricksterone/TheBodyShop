@@ -31,6 +31,7 @@ export default function Confirmation() {
             {orderDetails && (
               <Container>
                 <h2>Your Order Details:</h2>
+                <p>Order number: {orderDetails.orderNumber}</p>
                 <p>Name: {orderDetails.name}</p>
                 <p>Address: {orderDetails.address}</p>
                 <p>ZipCode: {orderDetails.zipcode}</p>
