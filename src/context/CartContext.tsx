@@ -10,8 +10,10 @@ type CartContext = {
   decreaseCartQuantity: (id: string) => void;
   removeFromCart: (id: string) => void;
   removeAllFromCart: () => void;
+  confirmationCart: () => void;
   cartQuantity: number;
   cartItems: CartItem[];
+  confirmationCartItems: CartItem[];
 };
 
 const CartContext = createContext({} as CartContext);
@@ -22,6 +24,9 @@ export function useCart() {
 
 export function CartProvider(props: PropsWithChildren) {
   const [cartItems, setCartItems] = useLocalStorage<cartItem[]>("cart", []);
+  const [confirmationCartItems, setCartConfirmation] = useLocalStorage<
+    cartItem[]
+  >("cartConfirmation", []);
 
   const cartQuantity = cartItems.reduce(
     (quantity, item) => item.quantity + quantity,
@@ -69,7 +74,7 @@ export function CartProvider(props: PropsWithChildren) {
   function decreaseCartQuantity(id: string) {
     setCartItems((currItems: cartItem[]) => {
       const existingItem = currItems.find((item) => item.id === id);
-  
+
       if (existingItem == null) {
         const product = getProductById(id);
         if (product) {
@@ -96,7 +101,7 @@ export function CartProvider(props: PropsWithChildren) {
             return item;
           }
         });
-  
+
         return updatedItems.filter((item) => item !== null) as cartItem[];
       }
       return currItems;
@@ -114,6 +119,12 @@ export function CartProvider(props: PropsWithChildren) {
     localStorage.setItem("cart", JSON.stringify([])); // Clear the cart in local storage
   }
 
+  function confirmationCart() {
+    setCartConfirmation([]);
+    localStorage.setItem("cartConfirmation", JSON.stringify([]));
+    setCartConfirmation(cartItems);
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -122,8 +133,10 @@ export function CartProvider(props: PropsWithChildren) {
         decreaseCartQuantity,
         removeFromCart,
         removeAllFromCart,
+        confirmationCart,
         cartItems,
         cartQuantity,
+        confirmationCartItems,
       }}
     >
       {props.children}

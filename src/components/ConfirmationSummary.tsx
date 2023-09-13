@@ -2,16 +2,24 @@ import { Grid, Typography } from "@mui/material";
 import { useCart } from "../context/CartContext";
 import ConfirmationItem from "./ConfirmationItem";
 
+const orderedProductsList = JSON.parse(
+  localStorage.getItem("orderDetails") || "[]"
+);
 export default function ConfirmationSummary() {
-  const { cartItems } = useCart();
+  const { confirmationCartItems } = useCart();
+  // const { cartItems } = useCart();
+
   return (
     <Grid>
-      {cartItems.map((item) => (
-        <ConfirmationItem key={item.id} {...item} />
+      {confirmationCartItems.map((product) => (
+        <ConfirmationItem key={product.id} {...product} />
       ))}
       <Typography variant="h6" fontWeight="bold" data-cy="total-price">
         Total Price payed: $
-        {cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)}
+        {confirmationCartItems.reduce(
+          (acc, item) => acc + item.price * item.quantity,
+          0
+        )}
       </Typography>
     </Grid>
   );
