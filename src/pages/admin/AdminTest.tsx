@@ -1,9 +1,17 @@
-import { Box, Button, List, ListItem, Typography, styled } from "@mui/material";
-import ProductItem from "../../components/admin/ProductItem";
-import EditProductItem from "../../components/admin/EditProductItem";
+import {
+  Box,
+  Button,
+  Hidden,
+  List,
+  ListItem,
+  Typography,
+  styled,
+} from "@mui/material";
 import { useState } from "react";
-import { useProducts } from "../../context/ProductsContext";
 import { useNavigate, useParams } from "react-router-dom";
+import EditProductItem from "../../components/admin/EditProductItem";
+import ProductItem from "../../components/admin/ProductItem";
+import { useProducts } from "../../context/ProductsContext";
 
 const ElemenetBox = styled(Box)({
   paddingBottom: "2.5rem",
@@ -48,11 +56,14 @@ const ButtonBox = styled(Box)({
   paddingLeft: "1rem",
 });
 
-const StyledButton = styled(Button)({
+const StyledButton = styled(Button)(({ theme }) => ({
   width: "25%",
   color: "white",
   background: "linear-gradient(to right bottom, #3e8ec1, #22ddc4)",
-});
+  [theme.breakpoints.between("xs", "md")]: {
+    width: "100%",
+  },
+}));
 
 export default function AdminTest() {
   const navigate = useNavigate();
@@ -82,7 +93,12 @@ export default function AdminTest() {
     <>
       <ElemenetBox>
         <TypoBox>
-          <Typo>Admin Page</Typo>
+          <Hidden mdUp>
+            <Typo>Admin</Typo>
+          </Hidden>
+          <Hidden mdDown>
+            <Typo>Admin Page</Typo>
+          </Hidden>
         </TypoBox>
         <ListContainer>
           <ListBox>
