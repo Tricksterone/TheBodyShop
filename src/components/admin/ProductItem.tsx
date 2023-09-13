@@ -3,6 +3,8 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Box, Hidden, IconButton, styled } from "@mui/material";
 import { Product } from "../../../data";
 import { useProducts } from "../../context/ProductsContext";
+import DialogAlert from "../DialogAlert";
+import { useState } from "react";
 
 interface ProductProps {
   product: Product;
@@ -34,7 +36,7 @@ const ItemId = styled(Box)({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  backgroundColor: "blue",
+  // backgroundColor: "blue",
   minWidth: 50,
 });
 const ImgContainer = styled(Box)(({ theme }) => ({
@@ -44,7 +46,7 @@ const ImgContainer = styled(Box)(({ theme }) => ({
   width: "3rem",
   padding: "0.5rem",
   objectFit: "contain",
-  backgroundColor: "purple",
+  // backgroundColor: "purple",
   [theme.breakpoints.between("xs", "md")]: {
     width: "95%",
     height: "95%",
@@ -56,7 +58,7 @@ const Image = styled("img")(({ theme }) => ({
   objectFit: "contain",
   width: "3rem",
   height: "3rem",
-  backgroundColor: "yellow",
+  // backgroundColor: "yellow",
   [theme.breakpoints.between("xs", "md")]: {
     width: "90%",
     height: "8rem",
@@ -69,12 +71,12 @@ const Item2 = styled(Box)(({ theme }) => ({
     justifyContent: "space-evenly",
     height: "auto",
     width: "100%",
-    backgroundColor: "brown",
+    // backgroundColor: "brown",
   },
 }));
 const TitleBox = styled(Box)({
   minWidth: 100,
-  backgroundColor: "red",
+  // backgroundColor: "red",
 });
 const DescriptionBox = styled(Box)({
   display: "flex",
@@ -82,27 +84,25 @@ const DescriptionBox = styled(Box)({
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  backgroundColor: "cyan",
+  // backgroundColor: "cyan",
 });
 const PriceBox = styled(Box)({
   display: "flex",
-  backgroundColor: "green",
+  // backgroundColor: "green",
   minWidth: 80,
 });
 const ButtonContainer = styled(Box)({
   display: "flex",
   flexDirection: "row",
   gap: "1rem",
-  backgroundColor: "gray",
+  // backgroundColor: "gray",
 });
 
 export default function ProductItem({ product, toggleEditing }: ProductProps) {
-  const { deleteProduct } = useProducts();
+  const [openDialog, setOpenDialog] = useState(false);
 
-  const handleDeleteClick = () => {
-    if (product) {
-      deleteProduct(product.id);
-    }
+  const handleButtonClick = () => {
+    setOpenDialog(true);
   };
 
   return (
@@ -122,9 +122,9 @@ export default function ProductItem({ product, toggleEditing }: ProductProps) {
         <IconButton onClick={toggleEditing}>
           <EditOutlinedIcon fontSize="large" style={{ color: "#3e8ec1" }} />
         </IconButton>
-        <IconButton onClick={handleDeleteClick}>
-          <DeleteOutlineIcon fontSize="large" style={{ color: "#3e8ec1" }} />
-        </IconButton>
+        <Box style={{ padding: "0.5rem" }}>
+          <DialogAlert product={product} />
+        </Box>
       </ButtonContainer>
     </ItemContainer>
   );

@@ -42,7 +42,7 @@ const ListBox = styled(Box)({
 const ButtonBox = styled(Box)({
   display: "flex",
   justifyContent: "flex-end",
-  backgroundColor: "green",
+  // backgroundColor: "green",
   paddingRight: "1rem",
   paddingLeft: "1rem",
 });
