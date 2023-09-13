@@ -100,7 +100,7 @@ const ButtonBox1 = styled(Box)({
   padding: "2rem",
   height: "full",
 });
-export default function Test() {
+export default function ProductDescriptionPage() {
   const {} = useCart();
   const { id } = useParams();
   const { products } = useProducts();
@@ -139,7 +139,7 @@ export default function Test() {
               </Typography>
             </PriceBox>
             <ButtonBox1>
-              <QuantityButton product={product} />
+              {product ? <QuantityButton product={product} /> : null}
             </ButtonBox1>
           </Item2>
         </SecondBox>
