@@ -51,7 +51,6 @@ const ListBox = styled(Box)({
 const ButtonBox = styled(Box)({
   display: "flex",
   justifyContent: "flex-end",
-  // backgroundColor: "green",
   paddingRight: "1rem",
   paddingLeft: "1rem",
 });
@@ -68,16 +67,23 @@ const StyledButton = styled(Button)(({ theme }) => ({
 export default function AdminProductsPage() {
   const navigate = useNavigate();
   const { products } = useProducts();
+  // Förklaring!
+  // isEditing är state-variabeln och setIsEditing är funktionen för att sätta värdet på isEditing
   const [isEditing, setIsEditing] = useState(Array(products.length).fill(true));
   const { id } = useParams();
 
   const isEditingMode = id ? true : false;
 
   const toggleEditing = (index: number, productId: string) => {
+    // kopierar arrayen till en tillfällig variabel
     const updatedEditing = [...isEditing];
+    // ändrar värdet för en specifik produkt. Är statet false blir det true och tvärtom
     updatedEditing[index] = !updatedEditing[index];
+    // ändrar värdet i state-variabeln
     setIsEditing(updatedEditing);
 
+    // beroende på id ska den enskilda produkten visas i edit-mode
+    // detta lyckas inte
     if (productId) {
       navigate(`/admin/product/${productId}`);
     } else {

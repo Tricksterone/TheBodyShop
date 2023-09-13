@@ -96,10 +96,8 @@ export default function EditProductItem({
 
   const saveProduct = (productToSave: Product) => {
     if (product) {
-      console.log("EDIT");
       editProduct(productToSave);
     } else {
-      console.log("ADD");
       addProduct(productToSave);
     }
     navigate("/admin");

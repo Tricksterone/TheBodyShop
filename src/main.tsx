@@ -29,7 +29,10 @@ const router = createBrowserRouter(
       <Route path="admin">
         <Route index element={<AdminProductsPage />} />
         <Route path="product/new" element={<ProductFormPage />} />
-        <Route path="product/:id" element={<ProductFormPage />} />
+        {/*Bortkommenterade kodraden fungerar */}
+        {/* <Route path="product/:id" element={<ProductFormPage />} /> */}
+        <Route path="product/:id" element={<AdminProductsPage />} />
+        {/* Koden ovanför är den koden som inte fungerar */}
       </Route>
       <Route path="*" element={<div>Not Found </div>} />
     </Route>

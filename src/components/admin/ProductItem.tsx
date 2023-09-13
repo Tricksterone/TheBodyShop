@@ -26,7 +26,6 @@ const Item1 = styled(Box)(({ theme }) => ({
     justifyContent: "center",
     height: "auto",
     width: "100%",
-    // backgroundColor: "brown",
     backgroundColor: "#f2f9fa",
   },
 }));
@@ -34,7 +33,6 @@ const ItemId = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  // backgroundColor: "blue",
   minWidth: 50,
   [theme.breakpoints.between("xs", "md")]: {
     justifyContent: "flex-start",
@@ -51,7 +49,6 @@ const ImgContainer = styled(Box)(({ theme }) => ({
   width: "3rem",
   padding: "0.5rem",
   objectFit: "contain",
-  // backgroundColor: "purple",
   [theme.breakpoints.between("xs", "md")]: {
     width: "95%",
     height: "95%",
@@ -63,7 +60,6 @@ const Image = styled("img")(({ theme }) => ({
   objectFit: "contain",
   width: "3rem",
   height: "3rem",
-  // backgroundColor: "yellow",
   [theme.breakpoints.between("xs", "md")]: {
     width: "90%",
     height: "8rem",
@@ -72,7 +68,6 @@ const Image = styled("img")(({ theme }) => ({
 }));
 const TitleBox = styled(Box)(({ theme }) => ({
   minWidth: 100,
-  // backgroundColor: "red",
   [theme.breakpoints.between("xs", "md")]: {
     minWidth: 0,
   },
@@ -83,11 +78,9 @@ const DescriptionBox = styled(Box)({
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  // backgroundColor: "cyan",
 });
 const PriceBox = styled(Box)(({ theme }) => ({
   display: "flex",
-  // backgroundColor: "green",
   minWidth: 80,
   [theme.breakpoints.between("xs", "md")]: {
     minWidth: 0,
@@ -98,7 +91,6 @@ const ButtonContainer = styled(Box)({
   flexDirection: "row",
   justifyContent: "flex-end",
   gap: "1rem",
-  // backgroundColor: "gray",
 });
 
 export default function ProductItem({ product, toggleEditing }: ProductProps) {
