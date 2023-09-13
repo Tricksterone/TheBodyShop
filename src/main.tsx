@@ -10,15 +10,13 @@ import RootLayout from "./components/RootLayout";
 import { CartProvider } from "./context/CartContext";
 import { ProductProvider } from "./context/ProductsContext";
 import "./index.css";
-import AdminPage from "./pages/AdminPage";
 import Cart from "./pages/Cart";
 import CheckoutPage from "./pages/CheckoutPage";
 import ConfirmationPage from "./pages/ConfirmationPage";
-import CreateProductPage from "./pages/CreateProductPage";
-import EditProductPage from "./pages/EditProductPage";
 import ProductDescriptionPage from "./pages/ProductDescriptionPage";
 import ProductsPage from "./pages/ProductsPage";
-import AdminTest from "./pages/admin/AdminTest";
+import ProductFormPage from "./pages/admin/ProductFormPage";
+import AdminProductsPage from "./pages/admin/AdminProductsPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,9 +27,9 @@ const router = createBrowserRouter(
       <Route path="confirmation" element={<ConfirmationPage />} />
       <Route path="/product/:id" element={<ProductDescriptionPage />} />
       <Route path="admin">
-        <Route index element={<AdminTest />} />
-        <Route path="product/new" element={<CreateProductPage />} />
-        <Route path="product/:id" element={<CreateProductPage />} />
+        <Route index element={<AdminProductsPage />} />
+        <Route path="product/new" element={<ProductFormPage />} />
+        <Route path="product/:id" element={<ProductFormPage />} />
       </Route>
       <Route path="*" element={<div>Not Found </div>} />
     </Route>

@@ -65,7 +65,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-export default function AdminTest() {
+export default function AdminProductsPage() {
   const navigate = useNavigate();
   const { products } = useProducts();
   const [isEditing, setIsEditing] = useState(Array(products.length).fill(true));

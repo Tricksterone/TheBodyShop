@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { Product } from "../../../data";
 import { useProducts } from "../../context/ProductsContext";
-import DialogAlert from "../DialogAlert";
+import DialogAlert from "./DialogAlert";
 
 interface ProductProps {
   product: Product;

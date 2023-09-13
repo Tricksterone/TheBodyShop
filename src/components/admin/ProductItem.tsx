@@ -1,7 +1,7 @@
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Box, Hidden, IconButton, styled } from "@mui/material";
 import { Product } from "../../../data";
-import DialogAlert from "../DialogAlert";
+import DialogAlert from "./DialogAlert";
 
 interface ProductProps {
   product: Product;
