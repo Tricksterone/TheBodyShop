@@ -18,6 +18,7 @@ import CreateProductPage from "./pages/CreateProductPage";
 import EditProductPage from "./pages/EditProductPage";
 import ProductDescriptionPage from "./pages/ProductDescriptionPage";
 import ProductsPage from "./pages/ProductsPage";
+import AdminTest from "./pages/admin/AdminTest";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,9 +29,9 @@ const router = createBrowserRouter(
       <Route path="confirmation" element={<ConfirmationPage />} />
       <Route path="/product/:id" element={<ProductDescriptionPage />} />
       <Route path="admin">
-        <Route index element={<AdminPage />} />
+        <Route index element={<AdminTest />} />
         <Route path="product/new" element={<CreateProductPage />} />
-        <Route path="product/:id" element={<EditProductPage />} />
+        <Route path="product/:id" element={<AdminTest />} />
       </Route>
       <Route path="*" element={<div>Not Found </div>} />
     </Route>
