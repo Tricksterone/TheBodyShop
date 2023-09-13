@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import { products } from "../../data";
+import { useProducts } from "../context/ProductsContext";
 import QuantityButton from "./QuantityButton";
 
 interface CartItemProps {
@@ -9,6 +9,7 @@ interface CartItemProps {
 }
 
 export default function CartItem({ id, quantity }: CartItemProps) {
+  const { products } = useProducts();
   const item = products.find((i) => i.id === id);
   if (item == null) return null;
 
