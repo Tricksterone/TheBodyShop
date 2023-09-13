@@ -49,7 +49,7 @@ function CheckoutPage() {
     resolver: zodResolver(OrderDetailsSchema),
   });
   const navigate = useNavigate();
-  const { removeAllFromCart } = useCart();
+  const { removeAllFromCart, confirmationCart } = useCart();
 
   // const [orderPlaced, setOrderPlaced] = useState(false);
 
@@ -60,10 +60,19 @@ function CheckoutPage() {
     }
 
     const orderNumber = generateUniqueOrderNumber();
-    const updatedOrderDetails = { ...formData, orderNumber, orderPlaced: true };
+    const updatedOrderDetails = {
+      ...formData,
+      // orderedProductsList: JSON.parse(localStorage.getItem("cart") || "[]"),
+      orderNumber,
+      orderPlaced: true,
+    };
+    const orderedProductsList = JSON.parse(
+      localStorage.getItem("cart") || "[]"
+    );
 
     // setOrderPlaced(true);
     navigate("/confirmation");
+    confirmationCart();
     removeAllFromCart();
 
     localStorage.setItem("orderDetails", JSON.stringify(updatedOrderDetails));
