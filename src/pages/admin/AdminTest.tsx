@@ -3,6 +3,7 @@ import ProductItem from "../../components/admin/ProductItem";
 import EditProductItem from "../../components/admin/EditProductItem";
 import { useState } from "react";
 import { useProducts } from "../../context/ProductsContext";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ElemenetBox = styled(Box)({
   paddingBottom: "2.5rem",
@@ -54,43 +55,53 @@ const StyledButton = styled(Button)({
 });
 
 export default function AdminTest() {
-  const context = useProducts();
-  const [isEditing, setIsEditing] = useState(
-    Array(context.products.length).fill(true)
-  );
+  const navigate = useNavigate();
+  const { products } = useProducts();
+  const [isEditing, setIsEditing] = useState(Array(products.length).fill(true));
+  const { id } = useParams();
 
-  console.log(context.products);
+  const isEditingMode = id ? true : false;
 
-  const toggleEditing = (index: number) => {
+  const toggleEditing = (index: number, productId: string) => {
     const updatedEditing = [...isEditing];
     updatedEditing[index] = !updatedEditing[index];
     setIsEditing(updatedEditing);
+
+    if (productId) {
+      navigate(`/admin/product/${productId}`);
+    } else {
+      navigate("/admin");
+    }
+  };
+
+  const handleAddItemClick = () => {
+    navigate("product/new/");
   };
 
   return (
     <>
       <ElemenetBox>
         <TypoBox>
-          <Typo>Products</Typo>
+          <Typo>Admin Page</Typo>
         </TypoBox>
         <ListContainer>
           <ListBox>
-            <ButtonBox>
+            <ButtonBox data-cy="admin-add-product" onClick={handleAddItemClick}>
               <StyledButton>New Product</StyledButton>
             </ButtonBox>
             <List>
-              {context.products.map((product, index) => (
-                <ListItem key={product.id}>
-                  {isEditing[index] ? (
-                    <ProductItem
-                      product={product}
-                      toggleEditing={() => toggleEditing(index)}
-                    />
-                  ) : (
+              {products.map((product, index) => (
+                <ListItem data-cy="product" key={product.id}>
+                  {isEditingMode ? (
                     <EditProductItem
                       product={product}
-                      toggleEditing={() => toggleEditing(index)}
+                      toggleEditing={() => toggleEditing(index, product.id)}
                       isEditing={isEditing[index]}
+                    />
+                  ) : (
+                    <ProductItem
+                      product={product}
+                      toggleEditing={() => toggleEditing(index, product.id)}
                     />
                   )}
                 </ListItem>

@@ -40,10 +40,22 @@ const ProductSchema: z.ZodType<Product> = z.object({
 export default function ProductForm({ product }: Props) {
   const navigate = useNavigate();
   const productContext = useProducts();
+  const products = productContext.products;
+  let lastItemId: string | undefined;
+
+  for (let i = products.length - 1; i >= 0; i--) {
+    const product = products[i];
+    if (product.id) {
+      const i = parseInt(product.id) + 1;
+      lastItemId = i.toString();
+      console.log(lastItemId);
+      break;
+    }
+  }
 
   const { register, handleSubmit, formState, setValue } = useForm<Product>({
     defaultValues: product || {
-      id: Date.now().toString(),
+      id: lastItemId,
     },
     resolver: zodResolver(ProductSchema),
   });
@@ -59,101 +71,131 @@ export default function ProductForm({ product }: Props) {
 
   const saveProduct = (productToSave: Product) => {
     if (product) {
-      console.log("EDIT");
       productContext.editProduct(productToSave);
-    } else {
-      console.log("ADD");
+    } else if (!product) {
       productContext.addProduct(productToSave);
     }
     navigate("/admin");
   };
 
+  const returnBtn = () => {
+    navigate("/admin");
+  };
+
   return (
-    <form data-cy="product-form" onSubmit={handleSubmit(saveProduct)}>
-      <Grid container spacing={3}>
-        <Grid item xs={6} sm={6}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <TextField
-                error={Boolean(formState.errors.title)}
-                helperText={formState.errors.title?.message}
-                FormHelperTextProps={
-                  {
-                    "data-cy": "product-title-error",
-                  } as FormHelperTextProps
-                }
-                id="title"
-                label="title"
-                type="text"
-                fullWidth
-                inputProps={{ "data-cy": "product-title" }}
-                {...register("title")}
-              />
+    <>
+      <form data-cy="product-form" onSubmit={handleSubmit(saveProduct)}>
+        <Grid container spacing={3}>
+          <Grid item xs={6} sm={6}>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <TextField
+                  error={Boolean(formState.errors.title)}
+                  helperText={formState.errors.title?.message}
+                  FormHelperTextProps={
+                    {
+                      "data-cy": "product-title-error",
+                    } as FormHelperTextProps
+                  }
+                  id="title"
+                  label="title"
+                  type="text"
+                  fullWidth
+                  inputProps={{ "data-cy": "product-title" }}
+                  {...register("title")}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  error={Boolean(formState.errors.image)}
+                  helperText={formState.errors.image?.message}
+                  FormHelperTextProps={
+                    {
+                      "data-cy": "product-image-error",
+                    } as FormHelperTextProps
+                  }
+                  id="image"
+                  label="Image Url"
+                  type="text"
+                  fullWidth
+                  inputProps={{ "data-cy": "product-image" }}
+                  {...register("image")}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  error={Boolean(formState.errors.description)}
+                  helperText={formState.errors.description?.message}
+                  FormHelperTextProps={
+                    {
+                      "data-cy": "product-description-error",
+                    } as FormHelperTextProps
+                  }
+                  id="description"
+                  label="description"
+                  type="text"
+                  fullWidth
+                  inputProps={{ "data-cy": "product-description" }}
+                  {...register("description")}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  error={Boolean(formState.errors.price)}
+                  helperText={formState.errors.price?.message}
+                  FormHelperTextProps={
+                    {
+                      "data-cy": "product-price-error",
+                    } as FormHelperTextProps
+                  }
+                  id="price"
+                  label="price"
+                  type="number"
+                  fullWidth
+                  inputProps={{ "data-cy": "product-price" }}
+                  {...register("price", { valueAsNumber: true })}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                error={Boolean(formState.errors.image)}
-                helperText={formState.errors.image?.message}
-                FormHelperTextProps={
-                  {
-                    "data-cy": "product-image-error",
-                  } as FormHelperTextProps
-                }
-                id="image"
-                label="Image Url"
-                type="text"
-                fullWidth
-                inputProps={{ "data-cy": "product-image" }}
-                {...register("image")}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                error={Boolean(formState.errors.description)}
-                helperText={formState.errors.description?.message}
-                FormHelperTextProps={
-                  {
-                    "data-cy": "product-description-error",
-                  } as FormHelperTextProps
-                }
-                id="description"
-                label="description"
-                type="text"
-                fullWidth
-                inputProps={{ "data-cy": "product-description" }}
-                {...register("description")}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                error={Boolean(formState.errors.price)}
-                helperText={formState.errors.price?.message}
-                FormHelperTextProps={
-                  {
-                    "data-cy": "product-price-error",
-                  } as FormHelperTextProps
-                }
-                id="price"
-                label="price"
-                type="number"
-                fullWidth
-                inputProps={{ "data-cy": "product-price" }}
-                {...register("price", { valueAsNumber: true })}
-              />
-            </Grid>
-          </Grid>
-          <Box mt={4}>
-            <Button
-              style={{ marginBottom: "10px" }}
-              variant="contained"
-              color="primary"
-              type="submit"
+            <Box
+              mt={4}
+              style={{
+                display: "flex",
+                flexDirection: "row",
+              }}
             >
-              Submit
-            </Button>
-          </Box>
+              <Box style={{ paddingRight: "1rem" }}>
+                <Button
+                  style={{
+                    marginBottom: "10px",
+                    background:
+                      "linear-gradient(to right bottom, #3e8ec1, #22ddc4)",
+                  }}
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </Box>
+              <Box style={{ paddingBottom: "3rem" }}>
+                <Button
+                  onClick={returnBtn}
+                  style={{
+                    marginBottom: "10px",
+                    background:
+                      "linear-gradient(to right bottom, #3e8ec1, #22ddc4)",
+                  }}
+                  variant="contained"
+                  color="primary"
+                >
+                  Return
+                </Button>
+              </Box>
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
-    </form>
+      </form>
+    </>
   );
 }

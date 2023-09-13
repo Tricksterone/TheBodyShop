@@ -31,7 +31,7 @@ const router = createBrowserRouter(
       <Route path="admin">
         <Route index element={<AdminTest />} />
         <Route path="product/new" element={<CreateProductPage />} />
-        <Route path="product/:id" element={<AdminTest />} />
+        <Route path="product/:id" element={<CreateProductPage />} />
       </Route>
       <Route path="*" element={<div>Not Found </div>} />
     </Route>

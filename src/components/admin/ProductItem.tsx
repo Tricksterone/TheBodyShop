@@ -1,10 +1,7 @@
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Box, Hidden, IconButton, styled } from "@mui/material";
 import { Product } from "../../../data";
-import { useProducts } from "../../context/ProductsContext";
 import DialogAlert from "../DialogAlert";
-import { useState } from "react";
 
 interface ProductProps {
   product: Product;
@@ -94,32 +91,27 @@ const PriceBox = styled(Box)({
 const ButtonContainer = styled(Box)({
   display: "flex",
   flexDirection: "row",
+  justifyContent: "flex-end",
   gap: "1rem",
   // backgroundColor: "gray",
 });
 
 export default function ProductItem({ product, toggleEditing }: ProductProps) {
-  const [openDialog, setOpenDialog] = useState(false);
-
-  const handleButtonClick = () => {
-    setOpenDialog(true);
-  };
-
   return (
     <ItemContainer boxShadow={3}>
       <Item1>
-        <ItemId>{product.id}</ItemId>
-        <ImgContainer>
+        <ItemId data-cy="product-id">{product.id}</ItemId>
+        <ImgContainer data-cy="product-image">
           <Image src={product.image} alt={product.title} />
         </ImgContainer>
       </Item1>
-      <TitleBox>{product.title}</TitleBox>
+      <TitleBox data-cy="product-title">{product.title}</TitleBox>
+      <PriceBox data-cy="product-price">${product.price}</PriceBox>
       <Hidden mdDown>
-        <PriceBox>{product.price}</PriceBox>
         <DescriptionBox>{product.description}</DescriptionBox>
       </Hidden>
       <ButtonContainer>
-        <IconButton onClick={toggleEditing}>
+        <IconButton data-cy="admin-edit-product" onClick={toggleEditing}>
           <EditOutlinedIcon fontSize="large" style={{ color: "#3e8ec1" }} />
         </IconButton>
         <Box style={{ padding: "0.5rem" }}>
