@@ -1,6 +1,6 @@
 import { Box, Container, Grid, styled } from "@mui/material";
-import { products } from "../../data/index";
 import Card from "../components/Card";
+import { useProducts } from "../context/ProductsContext";
 
 const StyledMainBox = styled(Box)({
   backgroundColor: "#fafaf8",
@@ -54,6 +54,7 @@ const StyledProductsContainer = styled(Container)({
 });
 
 export default function Products() {
+  const { products } = useProducts();
   return (
     <div>
       <StyledMainBox>
