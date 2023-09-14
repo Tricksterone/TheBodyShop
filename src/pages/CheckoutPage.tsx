@@ -3,7 +3,6 @@ import CartSummary from "../components/CartSummary";
 import CheckoutForm from "../components/CheckoutForm";
 
 export default function CheckoutPage() {
-  // const [orderPlaced, setOrderPlaced] = useState(false);
 
   return (
     <Container>
