@@ -14,7 +14,7 @@ interface ProductCardProps {
 
 export default function DialogAlert({ product }: ProductCardProps) {
   const [open, setOpen] = React.useState(false);
-  const { removeFromCart } = useCart();
+  const { removeAllProductsById } = useCart();
   const { deleteProduct } = useProducts();
   const [userChoice, setUserChoice] = React.useState("");
 
@@ -38,9 +38,10 @@ export default function DialogAlert({ product }: ProductCardProps) {
 
   React.useEffect(() => {
     if (userChoice === "agree") {
+      removeAllProductsById(product.id);
       deleteProduct(product.id);
     }
-  }, [userChoice, product.id, deleteProduct]);
+  }, [userChoice, product.id, deleteProduct, removeAllProductsById]);
 
   return (
     <>
