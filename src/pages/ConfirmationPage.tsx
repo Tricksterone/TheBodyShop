@@ -1,7 +1,6 @@
 import { Paper } from "@mui/material";
 import { Container } from "@mui/system";
 import ConfirmationSummary from "../components/ConfirmationSummary";
-// import ConfirmationSummary from "../components/ConfirmationSummary";
 
 export default function Confirmation() {
   const storedOrderDetails = localStorage.getItem("orderDetails");

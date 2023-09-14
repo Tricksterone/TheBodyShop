@@ -2,8 +2,6 @@ import { Box, Container, Grid, Hidden, styled } from "@mui/material";
 import Card from "../components/Card";
 import { useProducts } from "../context/ProductsContext";
 
-const StyledMainBox = styled(Box)({});
-
 const StyledHeroImageBox = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
@@ -56,7 +54,7 @@ const StyledProductsContainer = styled(Container)({
 export default function HomePage() {
   const { products } = useProducts();
   return (
-    <StyledMainBox>
+    <>
       <Hidden smDown>
         <StyledHeroImageBox>
           <StyledHeroImage
@@ -83,6 +81,6 @@ export default function HomePage() {
           ))}
         </Grid>
       </StyledProductsContainer>
-    </StyledMainBox>
+    </>
   );
 }

@@ -52,17 +52,14 @@ export default function RootLayout() {
   const navigate = useNavigate();
 
   const handleCartClick = () => {
-    // Navigerar till checkout-page
     navigate("/checkout");
   };
 
   const handleAdminClick = () => {
-    // Navigerar till checkout-page
     navigate("/admin");
   };
 
   const handleLogoClick = () => {
-    // Navigerar till homepage
     navigate("/");
   };
   return (
