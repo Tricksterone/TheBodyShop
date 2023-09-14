@@ -29,6 +29,7 @@ const router = createBrowserRouter(
       <Route path="admin">
         <Route index element={<AdminProductsPage />} />
         <Route path="product/new" element={<ProductFormPage />} />
+        {/* Detta är en kommentar */}
         {/*Koden nedanför kodraden fungerar */}
         <Route path="product/:id" element={<ProductFormPage />} />
         {/* <Route path="product/:id" element={<AdminProductsPage />} /> */}
