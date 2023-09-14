@@ -10,14 +10,9 @@ import RootLayout from "./components/RootLayout";
 import { CartProvider } from "./context/CartContext";
 import { ProductProvider } from "./context/ProductsContext";
 import "./index.css";
-import AdminPage from "./pages/AdminPage";
 import Cart from "./pages/Cart";
 import CheckoutPage from "./pages/CheckoutPage";
 import ConfirmationPage from "./pages/ConfirmationPage";
-import CreateProductPage from "./pages/CreateProductPage";
-import EditProductPage from "./pages/EditProductPage";
-import HomePage from "./pages/HomePage";
-import ProductDescriptionPage from "./pages/ProductDescriptionPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,9 +23,13 @@ const router = createBrowserRouter(
       <Route path="confirmation" element={<ConfirmationPage />} />
       <Route path="/product/:id" element={<ProductDescriptionPage />} />
       <Route path="admin">
-        <Route index element={<AdminPage />} />
-        <Route path="product/new" element={<CreateProductPage />} />
-        <Route path="product/:id" element={<EditProductPage />} />
+        <Route index element={<AdminProductsPage />} />
+        <Route path="product/new" element={<ProductFormPage />} />
+        {/* Detta är en kommentar */}
+        {/*Koden nedanför kodraden fungerar */}
+        <Route path="product/:id" element={<ProductFormPage />} />
+        {/* <Route path="product/:id" element={<AdminProductsPage />} /> */}
+        {/* Koden ovanför är den koden som inte fungerar */}
       </Route>
       <Route path="*" element={<div>Not Found </div>} />
     </Route>
