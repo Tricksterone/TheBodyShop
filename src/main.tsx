@@ -13,15 +13,11 @@ import "./index.css";
 import Cart from "./pages/Cart";
 import CheckoutPage from "./pages/CheckoutPage";
 import ConfirmationPage from "./pages/ConfirmationPage";
-import ProductDescriptionPage from "./pages/ProductDescriptionPage";
-import ProductsPage from "./pages/ProductsPage";
-import ProductFormPage from "./pages/admin/ProductFormPage";
-import AdminProductsPage from "./pages/admin/AdminProductsPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<RootLayout />}>
-      <Route index element={<ProductsPage />} />
+      <Route index element={<HomePage />} />
       <Route path="cart" element={<Cart />} />
       <Route path="checkout" element={<CheckoutPage />} />
       <Route path="confirmation" element={<ConfirmationPage />} />

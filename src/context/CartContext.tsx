@@ -1,6 +1,7 @@
 import { PropsWithChildren, createContext, useContext } from "react";
-import { CartItem, Product, products } from "../../data";
+import { CartItem, Product } from "../../data";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useProducts } from "../context/ProductsContext";
 
 type cartItem = CartItem;
 
@@ -27,6 +28,7 @@ export function CartProvider(props: PropsWithChildren) {
   const [confirmationCartItems, setCartConfirmation] = useLocalStorage<
     cartItem[]
   >("cartConfirmation", []);
+  const { products } = useProducts();
 
   const cartQuantity = cartItems.reduce(
     (quantity, item) => item.quantity + quantity,

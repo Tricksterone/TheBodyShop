@@ -4,6 +4,7 @@ import {
   AppBar,
   Badge,
   Box,
+  Hidden,
   IconButton,
   Toolbar,
   Typography,
@@ -15,7 +16,8 @@ import { useCart } from "../context/CartContext";
 
 const StyledAppBar = styled(AppBar)({
   position: "static",
-  backgroundColor: "#A3D4DB",
+  background: "linear-gradient(to right bottom, #aeccda, #4194be)",
+  // backgroundColor: "#A3D4DB",
   color: "white",
   padding: "1rem",
 });
@@ -41,7 +43,7 @@ const StyledFooterBox = styled(Box)({
   bottom: "0",
   width: "100%",
   height: "1rem",
-  backgroundColor: "#A3D4DB",
+  background: "linear-gradient(to right bottom, #aeccda, #4194be)",
   color: "white",
 });
 
@@ -71,19 +73,40 @@ export default function RootLayout() {
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <StyledAppbarBox onClick={handleLogoClick}>
               <StyledLogoImage src={"/images/logo.png"} alt="Logo" />
-              <Typography
-                style={{
-                  marginLeft: "2rem",
-                  fontSize: theme.breakpoints.down("sm") ? "large" : "xx-large",
-                }}
-              >
-                Tha BodyShop
-              </Typography>
+              <Hidden mdDown>
+                <Typography
+                  style={{
+                    marginLeft: "2rem",
+                    fontSize: "35px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Tha BodyShop
+                </Typography>
+              </Hidden>
+              <Hidden mdUp smDown>
+                <Typography
+                  style={{
+                    marginLeft: "2rem",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Tha BodyShop
+                </Typography>
+              </Hidden>
             </StyledAppbarBox>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "2rem",
+              }}
+            >
               <IconButton
                 color="inherit"
                 aria-label="profile"
+                size="large"
                 onClick={handleAdminClick}
                 data-cy="admin-link"
               >
@@ -112,7 +135,19 @@ export default function RootLayout() {
         <Outlet />
       </main>
       <footer style={{ display: "flex" }}>
-        <StyledFooterBox>FOOTER</StyledFooterBox>
+        <StyledFooterBox>
+          <Hidden mdDown>
+            <Typography style={{ fontWeight: "bold" }}>
+              Discover the heartbeat of our store – where every organ tells a
+              unique story.
+            </Typography>
+          </Hidden>
+          <Hidden smDown>
+            <Typography style={{ fontWeight: "bold" }}>
+              Discover the heartbeat of our store.
+            </Typography>
+          </Hidden>
+        </StyledFooterBox>
       </footer>
     </div>
   );

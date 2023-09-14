@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import { products } from "../../data";
+
+import { useProducts } from "../context/ProductsContext";
 
 interface ConfirmationItemProps {
   id: string;
@@ -11,6 +12,8 @@ export default function ConfirmationItem({
   id,
   quantity,
 }: ConfirmationItemProps) {
+  const { products } = useProducts();
+
   const item = products.find((i) => i.id === id);
   if (item == null) return null;
 
