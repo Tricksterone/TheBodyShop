@@ -16,13 +16,13 @@ import CheckoutPage from "./pages/CheckoutPage";
 import ConfirmationPage from "./pages/ConfirmationPage";
 import CreateProductPage from "./pages/CreateProductPage";
 import EditProductPage from "./pages/EditProductPage";
+import HomePage from "./pages/HomePage";
 import ProductDescriptionPage from "./pages/ProductDescriptionPage";
-import ProductsPage from "./pages/ProductsPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<RootLayout />}>
-      <Route index element={<ProductsPage />} />
+      <Route index element={<HomePage />} />
       <Route path="cart" element={<Cart />} />
       <Route path="checkout" element={<CheckoutPage />} />
       <Route path="confirmation" element={<ConfirmationPage />} />

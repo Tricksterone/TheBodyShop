@@ -1,10 +1,8 @@
-import { Box, Container, Grid, styled } from "@mui/material";
+import { Box, Container, Grid, Hidden, styled } from "@mui/material";
 import Card from "../components/Card";
 import { useProducts } from "../context/ProductsContext";
 
-const StyledMainBox = styled(Box)({
-  backgroundColor: "#fafaf8",
-});
+const StyledMainBox = styled(Box)({});
 
 const StyledHeroImageBox = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -28,7 +26,10 @@ const StyledHeroImage = styled("img")({
 
 const StyledSlogan = styled(Box)(({ theme }) => ({
   position: "absolute",
-  color: "#377794",
+  // color: "#377794",
+  background: "linear-gradient(to right bottom, #3e8ec1, #22ddc4)",
+  backgroundClip: "text",
+  color: "transparent",
   right: "5%",
   top: "45%",
   fontSize: "3rem",
@@ -53,18 +54,20 @@ const StyledProductsContainer = styled(Container)({
   alignContent: "center",
 });
 
-export default function Products() {
+export default function HomePage() {
   const { products } = useProducts();
   return (
     <div>
       <StyledMainBox>
-        <StyledHeroImageBox>
-          <StyledHeroImage
-            src="./images/hero125039.png"
-            alt="Two smiling doctors in a hospital environment"
-          ></StyledHeroImage>
-          <StyledSlogan>All our organs are organic</StyledSlogan>
-        </StyledHeroImageBox>
+        <Hidden smDown>
+          <StyledHeroImageBox>
+            <StyledHeroImage
+              src="./images/hero125039.png"
+              alt="Two smiling doctors in a hospital environment"
+            ></StyledHeroImage>
+            <StyledSlogan>All our organs are organic</StyledSlogan>
+          </StyledHeroImageBox>
+        </Hidden>
         <StyledProductsContainer>
           <Grid container spacing={2}>
             {products.map((product) => (
