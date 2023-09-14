@@ -17,7 +17,6 @@ import { useCart } from "../context/CartContext";
 const StyledAppBar = styled(AppBar)({
   position: "static",
   background: "linear-gradient(to right bottom, #aeccda, #4194be)",
-  // backgroundColor: "#A3D4DB",
   color: "white",
   padding: "1rem",
 });
@@ -67,7 +66,7 @@ export default function RootLayout() {
     navigate("/");
   };
   return (
-    <div>
+    <>
       <header>
         <StyledAppBar>
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -131,7 +130,7 @@ export default function RootLayout() {
           </Toolbar>
         </StyledAppBar>
       </header>
-      <main>
+      <main style={{ minHeight: "78.5vh" }}>
         <Outlet />
       </main>
       <footer style={{ display: "flex" }}>
@@ -149,6 +148,6 @@ export default function RootLayout() {
           </Hidden>
         </StyledFooterBox>
       </footer>
-    </div>
+    </>
   );
 }

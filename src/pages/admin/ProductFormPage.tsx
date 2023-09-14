@@ -7,7 +7,7 @@ const Typo = styled(Typography)({
   display: "flex",
   fontWeight: "bold",
   fontSize: "4rem",
-  background: "linear-gradient(to right bottom, #3e8ec1, #22ddc4)",
+  background: "linear-gradient(to right bottom, #aeccda, #4194be)",
   backgroundClip: "text",
   color: "transparent",
 });
@@ -28,28 +28,15 @@ export default function ProductFormPage() {
           justifyContent: "center",
         }}
       >
-        <Hidden xsDown mdUp>
-          <Typo
-            display={"flex"}
-            justifyContent={"center"}
-            variant="h6"
-            gutterBottom
-            marginTop={2}
-          >
-            {id ? "Edit" : "Create"}
-          </Typo>
-        </Hidden>
-        <Hidden mdDown>
-          <Typo
-            display={"flex"}
-            justifyContent={"center"}
-            variant="h6"
-            gutterBottom
-            marginTop={2}
-          >
-            {id ? "Edit Product" : "Create Product"}
-          </Typo>
-        </Hidden>
+        <Typo
+          display={"flex"}
+          justifyContent={"center"}
+          variant="h6"
+          gutterBottom
+          marginTop={2}
+        >
+          {id ? "Edit" : "Create"} <Hidden mdDown>Product</Hidden>
+        </Typo>
         <ProductForm product={product} />
       </Container>
     </Container>

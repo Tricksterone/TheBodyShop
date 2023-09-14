@@ -1,6 +1,7 @@
 import { PropsWithChildren, createContext, useContext } from "react";
 import { Product, products as mockedProducts } from "../../data";
 import { useLocalStorage as useLocalStorageState } from "../hooks/useLocalStorage";
+import { useCart } from "./CartContext";
 
 type ProductsContextValue = {
   addProduct: (product: Product) => void;
