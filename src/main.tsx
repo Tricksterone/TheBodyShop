@@ -12,7 +12,6 @@ import { ProductProvider } from "./context/ProductsContext";
 import "./index.css";
 import AdminProductsPage from "./pages/admin/AdminProductsPage";
 import ProductFormPage from "./pages/admin/ProductFormPage";
-import Cart from "./pages/Cart";
 import CheckoutPage from "./pages/CheckoutPage";
 import ConfirmationPage from "./pages/ConfirmationPage";
 import HomePage from "./pages/HomePage";
@@ -22,7 +21,6 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<RootLayout />}>
       <Route index element={<HomePage />} />
-      <Route path="cart" element={<Cart />} />
       <Route path="checkout" element={<CheckoutPage />} />
       <Route path="confirmation" element={<ConfirmationPage />} />
       <Route path="/product/:id" element={<ProductDescriptionPage />} />
