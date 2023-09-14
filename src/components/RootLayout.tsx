@@ -57,7 +57,7 @@ export default function RootLayout() {
   };
 
   const handleAdminClick = () => {
-    // Navigerar till checkout-page
+    // Navigerar till admin-page
     navigate("/admin");
   };
 

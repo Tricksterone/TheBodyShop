@@ -2,12 +2,8 @@ import { Grid, Typography } from "@mui/material";
 import { useCart } from "../context/CartContext";
 import ConfirmationItem from "./ConfirmationItem";
 
-const orderedProductsList = JSON.parse(
-  localStorage.getItem("orderDetails") || "[]"
-);
 export default function ConfirmationSummary() {
   const { confirmationCartItems } = useCart();
-  // const { cartItems } = useCart();
 
   return (
     <Grid>
