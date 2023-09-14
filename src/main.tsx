@@ -10,9 +10,13 @@ import RootLayout from "./components/RootLayout";
 import { CartProvider } from "./context/CartContext";
 import { ProductProvider } from "./context/ProductsContext";
 import "./index.css";
+import AdminProductsPage from "./pages/admin/AdminProductsPage";
+import ProductFormPage from "./pages/admin/ProductFormPage";
 import Cart from "./pages/Cart";
 import CheckoutPage from "./pages/CheckoutPage";
 import ConfirmationPage from "./pages/ConfirmationPage";
+import HomePage from "./pages/HomePage";
+import ProductDescriptionPage from "./pages/ProductDescriptionPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,7 +29,6 @@ const router = createBrowserRouter(
       <Route path="admin">
         <Route index element={<AdminProductsPage />} />
         <Route path="product/new" element={<ProductFormPage />} />
-        {/* Detta är en kommentar */}
         {/*Koden nedanför kodraden fungerar */}
         <Route path="product/:id" element={<ProductFormPage />} />
         {/* <Route path="product/:id" element={<AdminProductsPage />} /> */}

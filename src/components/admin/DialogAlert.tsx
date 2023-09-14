@@ -3,9 +3,9 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import * as React from "react";
 import { Product } from "../../../data";
+import { useCart } from "../../context/CartContext";
 import { useProducts } from "../../context/ProductsContext";
 
 interface ProductCardProps {
@@ -14,6 +14,7 @@ interface ProductCardProps {
 
 export default function DialogAlert({ product }: ProductCardProps) {
   const [open, setOpen] = React.useState(false);
+  const { removeAllProductsById } = useCart();
   const { deleteProduct } = useProducts();
   const [userChoice, setUserChoice] = React.useState("");
 
@@ -37,9 +38,10 @@ export default function DialogAlert({ product }: ProductCardProps) {
 
   React.useEffect(() => {
     if (userChoice === "agree") {
+      removeAllProductsById(product.id);
       deleteProduct(product.id);
     }
-  }, [userChoice, product.id, deleteProduct]);
+  }, [userChoice, product.id, deleteProduct, removeAllProductsById]);
 
   return (
     <>
@@ -56,9 +58,6 @@ export default function DialogAlert({ product }: ProductCardProps) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Are you sure you want to delete this product?!

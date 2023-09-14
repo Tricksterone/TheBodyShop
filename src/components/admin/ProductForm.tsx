@@ -169,7 +169,7 @@ export default function ProductForm({ product }: Props) {
                     style={{
                       marginBottom: "10px",
                       background:
-                        "linear-gradient(to right bottom, #3e8ec1, #22ddc4)",
+                        "linear-gradient(to right bottom, #aeccda, #4194be)",
                     }}
                     variant="contained"
                     color="primary"
@@ -184,7 +184,7 @@ export default function ProductForm({ product }: Props) {
                     style={{
                       marginBottom: "10px",
                       background:
-                        "linear-gradient(to right bottom, #3e8ec1, #22ddc4)",
+                        "linear-gradient(to right bottom, #aeccda, #4194be)",
                     }}
                     variant="contained"
                     color="primary"

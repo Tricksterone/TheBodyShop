@@ -26,7 +26,6 @@ const StyledHeroImage = styled("img")({
 
 const StyledSlogan = styled(Box)(({ theme }) => ({
   position: "absolute",
-  // color: "#377794",
   background: "linear-gradient(to right bottom, #3e8ec1, #22ddc4)",
   backgroundClip: "text",
   color: "transparent",
@@ -57,35 +56,33 @@ const StyledProductsContainer = styled(Container)({
 export default function HomePage() {
   const { products } = useProducts();
   return (
-    <div>
-      <StyledMainBox>
-        <Hidden smDown>
-          <StyledHeroImageBox>
-            <StyledHeroImage
-              src="./images/hero125039.png"
-              alt="Two smiling doctors in a hospital environment"
-            ></StyledHeroImage>
-            <StyledSlogan>All our organs are organic</StyledSlogan>
-          </StyledHeroImageBox>
-        </Hidden>
-        <StyledProductsContainer>
-          <Grid container spacing={2}>
-            {products.map((product) => (
-              <Grid
-                data-cy="product"
-                key={product.id}
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                lg={4}
-              >
-                <Card product={product} />
-              </Grid>
-            ))}
-          </Grid>
-        </StyledProductsContainer>
-      </StyledMainBox>
-    </div>
+    <StyledMainBox>
+      <Hidden smDown>
+        <StyledHeroImageBox>
+          <StyledHeroImage
+            src="./images/hero125039.png"
+            alt="Two smiling doctors in a hospital environment"
+          />
+          <StyledSlogan>All our organs are organic</StyledSlogan>
+        </StyledHeroImageBox>
+      </Hidden>
+      <StyledProductsContainer>
+        <Grid container spacing={2}>
+          {products.map((product) => (
+            <Grid
+              data-cy="product"
+              key={product.id}
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              lg={4}
+            >
+              <Card product={product} />
+            </Grid>
+          ))}
+        </Grid>
+      </StyledProductsContainer>
+    </StyledMainBox>
   );
 }

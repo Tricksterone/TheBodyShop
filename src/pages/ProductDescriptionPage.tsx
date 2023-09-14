@@ -6,7 +6,6 @@ import { useProducts } from "../context/ProductsContext";
 
 const FirstBox = styled(Box)(({ theme }) => ({
   display: "flex",
-  // backgroundColor: "green",
   padding: "1rem",
   height: "full",
   [theme.breakpoints.between("md", "xl")]: {
@@ -16,7 +15,6 @@ const FirstBox = styled(Box)(({ theme }) => ({
 const SecondBox = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
-  // backgroundColor: "blue",
   padding: "1rem",
   height: "full",
   [theme.breakpoints.between("xs", "sm")]: {
@@ -29,7 +27,6 @@ const SecondBox = styled(Box)(({ theme }) => ({
 const Item1 = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
-  // backgroundColor: "cyan",
   padding: "1rem",
   width: "100%",
   objectFit: "contain",
@@ -55,7 +52,6 @@ const Item2 = styled(Box)({
   display: "flex",
   flexDirection: "column",
   justifyContent: "flex-start",
-  // backgroundColor: "cyan",
   padding: "1rem",
   height: "full",
   width: "100%",
@@ -63,7 +59,6 @@ const Item2 = styled(Box)({
 const TextBox = styled(Box)({
   display: "flex",
   flexDirection: "column",
-  // backgroundColor: "yellow",
   padding: "1rem",
   height: "full",
 });
@@ -72,22 +67,18 @@ const StyledTitle = styled(Box)({
   textAlign: "left",
   fontWeight: "bold",
   fontSize: "h2.fontSize",
-  // backgroundColor: "blue",
   padding: "1rem",
   height: "full",
 });
 const StyledDescription = styled(Box)({
   display: "flex",
   textAlign: "left",
-  // backgroundColor: "blue",
   padding: "1rem",
   height: "full",
 });
 
 const PriceBox = styled(Box)({
   display: "flex",
-  // backgroundColor: "purple",
-
   padding: "0rem",
   paddingTop: "1rem",
   paddingLeft: "2rem",
@@ -96,7 +87,6 @@ const PriceBox = styled(Box)({
 const ButtonBox1 = styled(Box)({
   display: "flex",
   flexDirection: "column",
-  // backgroundColor: "yellow",
   padding: "2rem",
   height: "full",
 });

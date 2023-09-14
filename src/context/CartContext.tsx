@@ -10,6 +10,7 @@ type CartContext = {
   increaseCartQuantity: (id: string) => void;
   decreaseCartQuantity: (id: string) => void;
   removeFromCart: (id: string) => void;
+  removeAllProductsById: (id: string) => void;
   removeAllFromCart: () => void;
   confirmationCart: () => void;
   cartQuantity: number;
@@ -116,9 +117,13 @@ export function CartProvider(props: PropsWithChildren) {
     });
   }
 
+  function removeAllProductsById(id: string) {
+    setCartItems((currItems) => currItems.filter((item) => item.id !== id));
+  }
+
   function removeAllFromCart() {
-    setCartItems([]); // Clear the cartItems state
-    localStorage.setItem("cart", JSON.stringify([])); // Clear the cart in local storage
+    setCartItems([]);
+    localStorage.setItem("cart", JSON.stringify([]));
   }
 
   function confirmationCart() {
@@ -134,6 +139,7 @@ export function CartProvider(props: PropsWithChildren) {
         increaseCartQuantity,
         decreaseCartQuantity,
         removeFromCart,
+        removeAllProductsById,
         removeAllFromCart,
         confirmationCart,
         cartItems,

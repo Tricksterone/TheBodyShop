@@ -31,7 +31,7 @@ const Typo = styled(Typography)({
   justifyContent: "center",
   fontWeight: "bold",
   fontSize: "4rem",
-  background: "linear-gradient(to right bottom, #3e8ec1, #22ddc4)",
+  background: "linear-gradient(to right bottom, #aeccda, #4194be)",
   backgroundClip: "text",
   color: "transparent",
 });
@@ -58,7 +58,7 @@ const ButtonBox = styled(Box)({
 const StyledButton = styled(Button)(({ theme }) => ({
   width: "25%",
   color: "white",
-  background: "linear-gradient(to right bottom, #3e8ec1, #22ddc4)",
+  background: "linear-gradient(to right bottom, #aeccda, #4194be)",
   [theme.breakpoints.between("xs", "md")]: {
     width: "100%",
   },

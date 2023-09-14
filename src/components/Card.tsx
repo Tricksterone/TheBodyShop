@@ -16,7 +16,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const { increaseCartQuantity, getItemQuantity } = useCart();
+  const { increaseCartQuantity } = useCart();
 
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -33,7 +33,11 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <>
-      <Card data-cy="product-id" key={product.id} sx={{ maxWidth: 345 }}>
+      <Card
+        data-cy="product-id"
+        key={product.id}
+        sx={{ maxWidth: 345, boxShadow: 3 }}
+      >
         <CardHeader
           data-cy="product-title"
           title={
@@ -49,7 +53,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           }
         />
         <Link to={`/product/${product.id}`}>
-          <div style={{ height: 300 }}>
+          <Box sx={{ height: 300 }}>
             <CardMedia
               title={product.title}
               component="img"
@@ -58,7 +62,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               image={product.image}
               alt={product.title}
             />
-          </div>
+          </Box>
         </Link>
         <CardContent>
           <br />
