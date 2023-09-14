@@ -49,12 +49,12 @@ export default function ProductCard({ product }: ProductCardProps) {
           }
         />
         <Link to={`/product/${product.id}`}>
-          <div style={{ height: 400 }}>
+          <div style={{ height: 300 }}>
             <CardMedia
               title={product.title}
               component="img"
-              // height="400"
-              style={{ objectFit: "cover" }}
+              height="300px"
+              style={{ objectFit: "contain" }}
               image={product.image}
               alt={product.title}
             />
