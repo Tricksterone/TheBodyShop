@@ -31,6 +31,7 @@ const router = createBrowserRouter(
         <Route path="product/:id" element={<ProductFormPage />} />
         {/* <Route path="product/:id" element={<AdminProductsPage />} /> */}
         {/* Koden ovanför är den koden som inte fungerar */}
+        {/*Detta är kvar för vidare utveckling! :) */}
       </Route>
       <Route path="*" element={<div>Not Found </div>} />
     </Route>

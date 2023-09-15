@@ -21,6 +21,11 @@ Material UI - MUI.
 https://mui.com/material-ui/
 
 Vi har använt oss av MUI och dess komponenter i alla våra styling-komponenter och pages.
-<Box> <Container> <Grid> <Card> <Hidden> <Typography> <Textfield> <ListItem> <Snackbar> <AlertDialog> <Stack> styled sx={{}}
+<Box> <Container> <Grid> <Card> <Hidden> <Typography> <Textfield> <ListItem> <Snackbar> <AlertDialog> <Stack> <Button> styled sx={{}}
 
 Vi har förälskat oss i styled och har designat många av våra olika komponenter för sig och inte använt oss av det globala theme-verktyget. Nu känner vi oss varmare om kläderna och skulle våga oss på theme. :)
+
+## Starta programmet
+
+- `npm run dev` för att köra programmet
+- `npm run test` för att köra testerna
